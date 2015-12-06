@@ -43,6 +43,26 @@ class Index(Plugin):
         # Add widget to the user interface
         context.add_widget(self._widget)
 
+
+
+        # Create QWidget
+        self._widget2 = QWidget()
+        # Get path to UI file which should be in the "resource" folder of this package
+        ui_file = os.path.join(rospkg.RosPack().get_path('rqt_pr2_hand_syntouch_sensor_interface'), 'resource', 'Index.ui')
+        # Extend the widget with all attributes and children from UI file
+        loadUi(ui_file, self._widget2)
+        # Give QObjects reasonable names
+        self._widget.setObjectName('IndexUi2')
+        # Show _widget.windowTitle on left-top of each plugin (when 
+        # it's set in _widget). This is useful when you open multiple 
+        # plugins at once. Also if you open multiple instances of your 
+        # plugin at once, these lines add number to make it easy to 
+        # tell from pane to pane.
+        if context.serial_number() > 1:
+            self._widget.setWindowTitle(self._widget.windowTitle() + (' (%d)' % context.serial_number()))
+        # Add widget to the user interface
+        context.add_widget(self._widget2)
+
     def shutdown_plugin(self):
         # TODO unregister all publishers here
         pass
