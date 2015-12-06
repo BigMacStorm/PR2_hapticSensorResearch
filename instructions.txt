@@ -1,0 +1,7 @@
+1. Use a linux operating system to install ROS (I used ubuntu 15.04 in vmware). If you want to do the same, you can follow the instructions here to install ROS jade: http://wiki.ros.org/jade/Installation/Ubuntu.
+
+2. Open up roscore by typing "roscore &" in terminal.
+
+3. Test rqt by opening it using "rqt" in terminal.
+
+4. Write plugins for rqt that implement our interface in either C++ or python. See http://wiki.ros.org/rqt/Tutorials/Writing%20a%20C%2B%2B%20Plugin for C++ or http://wiki.ros.org/rqt/Tutorials/Writing%20a%20Python%20Plugin for python.
