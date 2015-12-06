@@ -4,4 +4,10 @@
 
 3. Test rqt by opening it using "rqt" in terminal.
 
-4. Write plugins for rqt that implement our interface in either C++ or python. See http://wiki.ros.org/rqt/Tutorials/Writing%20a%20C%2B%2B%20Plugin for C++ or http://wiki.ros.org/rqt/Tutorials/Writing%20a%20Python%20Plugin for python.
+4. add the current working directory to the ROS_PACKAGE_PATH enviornment variable by running the following command from the git directory.
+export ROS_PACKAGE_PATH="$ROS_PACKAGE_PATH:$(pwd)"
+
+5. You should now be able to run the program by running the following command.
+rqt --standalone rqt_pr2_hand_syntouch_sensor_interface
+
+6. Write plugins for rqt that implement our interface in either C++ or python. See http://wiki.ros.org/rqt/Tutorials/Writing%20a%20C%2B%2B%20Plugin for C++ or http://wiki.ros.org/rqt/Tutorials/Writing%20a%20Python%20Plugin for python.
