@@ -13,7 +13,7 @@
       </group>
       -->
       <label>PR2 Hand and Syntouch Sensor Real-Time Interface</label>
-      <statustip>Plugin to be used with a PR2 robot that has BioTac Syntouch Sensors installed. </statustip>
+      <statustip> Plugin to be used with a PR2 robot that has BioTac Syntouch Sensors installed.  </statustip>
     </qtgui>
   </class>
 </library>
