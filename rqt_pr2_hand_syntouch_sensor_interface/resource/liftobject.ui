@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>liftObject</class>
- <widget name="liftObject" class="QDialog">
+ <widget class="QDialog" name="liftObject">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,6 +13,200 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>20</y>
+     <width>121</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PR2 Lift Object Program</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>60</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Parameters:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>90</y>
+     <width>47</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Use: </string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="lift_comboBox">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>80</y>
+     <width>71</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Left Hand</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Right Hand</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Telekinesis</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>110</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Object Location:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>130</y>
+     <width>47</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>X:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>190</y>
+     <width>47</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Z:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>160</y>
+     <width>47</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Y:</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="lift_xCoord">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>130</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="plainText">
+    <string>0.0</string>
+   </property>
+   <property name="placeholderText">
+    <string>N/A</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="lift_yCoord">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>160</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="plainText">
+    <string>0.0</string>
+   </property>
+   <property name="placeholderText">
+    <string>N/A</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="lift_zCoord">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>190</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="plainText">
+    <string>0.0</string>
+   </property>
+   <property name="placeholderText">
+    <string>N/A</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="lift_lift">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>240</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Lift</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="lift_textBox">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>60</y>
+     <width>161</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="plainText">
+    <string>Execution State:
+Not Running
+Left hand empty
+Object in Reach
+</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
