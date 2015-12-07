@@ -16,9 +16,9 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>70</x>
      <y>20</y>
-     <width>141</width>
+     <width>241</width>
      <height>16</height>
     </rect>
    </property>
@@ -29,10 +29,10 @@
   <widget class="QPushButton" name="swap_swap">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>10</x>
      <y>230</y>
-     <width>75</width>
-     <height>23</height>
+     <width>181</width>
+     <height>50</height>
     </rect>
    </property>
    <property name="text">
@@ -42,10 +42,10 @@
   <widget class="QPlainTextEdit" name="swap_textBox">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>210</x>
      <y>60</y>
-     <width>161</width>
-     <height>191</height>
+     <width>171</width>
+     <height>221</height>
     </rect>
    </property>
    <property name="plainText">
