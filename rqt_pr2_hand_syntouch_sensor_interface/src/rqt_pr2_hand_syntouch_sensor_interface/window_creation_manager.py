@@ -20,6 +20,9 @@ class WindowCreationManager:
     elif window_type is WindowTypes.ConnectionWindow:
       self._open_window_managers.add(ConnectionWindowManager(self._pr2_interface))
       self._open_window_types.add(window_type)
+    elif window_type is WindowTypes.SensorVisualizerWindow:
+      self._open_window_managers.add(SensorWindowManager(self._pr2_interface))
+      self._open_window_types.add(window_type)
     else:
       raise NotImplementedError
     
