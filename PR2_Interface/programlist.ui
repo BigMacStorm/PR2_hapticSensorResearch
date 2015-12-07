@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>programList</class>
- <widget name="programList" class="QDialog">
+ <widget class="QDialog" name="programList">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,6 +13,97 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>20</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PR2 Programs</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>60</y>
+     <width>131</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Choose a program to run: </string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="prog_takePulse">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>80</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>takePulse</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="prog_liftObject">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>110</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>liftObject</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="prog_placeObject">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>140</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>placeObject</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="prog_rotateObject">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>170</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>rotateObject</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="prog_switchHands">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>200</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>switchHands</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

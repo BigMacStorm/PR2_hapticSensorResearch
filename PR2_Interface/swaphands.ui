@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>swapHands</class>
- <widget name="swapHands" class="QDialog">
+ <widget class="QDialog" name="swapHands">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,6 +13,50 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>20</y>
+     <width>141</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PR2 Swap Hands Program</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="swap_swap">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>230</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Swap</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="swap_textBox">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>60</y>
+     <width>161</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="plainText">
+    <string>Execution State:
+Not Running
+Left hand empty
+Right hand full
+
+</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

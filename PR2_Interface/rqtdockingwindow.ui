@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>rqtDockingWindow</class>
- <widget name="rqtDockingWindow" class="QDialog">
+ <widget class="QDialog" name="rqtDockingWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,6 +13,19 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>120</y>
+     <width>47</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>idk</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
