@@ -1,4 +1,5 @@
 from .index_window_manager import IndexWindowManager
+from .connection_window_manager import ConnectionWindowManager
 from .window_types import WindowTypes
 
 class WindowCreationManager:
@@ -16,7 +17,9 @@ class WindowCreationManager:
     if window_type is WindowTypes.IndexWindow:
       self._open_window_managers.add(IndexWindowManager(self._pr2_interface))
       self._open_window_types.add(window_type)
-    
+    elif window_type is WindowTypes.ConnectionWindow:
+      self._open_window_managers.add(ConnectionWindowManager(self._pr2_interface))
+      self._open_window_types.add(window_type)
     else:
       raise NotImplementedError
     

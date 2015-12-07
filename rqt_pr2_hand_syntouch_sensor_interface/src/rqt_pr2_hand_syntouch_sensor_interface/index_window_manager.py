@@ -5,6 +5,8 @@ import rospkg
 from python_qt_binding import loadUi
 from python_qt_binding.QtGui import QWidget
 
+from .window_types import WindowTypes
+
 class IndexWindowManager:
 
   def __init__(self, pr2_interface):
@@ -28,12 +30,12 @@ class IndexWindowManager:
         'PR2 Robotic Hand and Syntouch Sensor Real-Time Interface')
 
     # Add widget to the user interface
-    user_interface = pr2_interface._context
+    user_interface = pr2_interface.get_user_interface()
     user_interface.add_widget(self._widget)
 
     # Register listeners for all of the buttons on the Index window.
-#    self._widget.ConnectionInfoButton.clicked.connect(
-#        self._handle_connection_info_button_clicked)
+    self._widget.ConnectionInfoButton.clicked.connect(
+        self._handle_connection_info_button_clicked)
 #
 #    self._widget.DataGraphsButton.clicked.connect(
 #        self._handle_data_graphs_button_clicked)
@@ -50,8 +52,8 @@ class IndexWindowManager:
 #    self._widget.LifetimeStatisticsButton.clicked.connect(
 #        self._handle_lifetime_statistics_button_clicked)
 #
-#  def _handle_connection_info_button_clicked(self):
-#    self._pr2_interface.open_window(WindowTypes.ConnectionWindow)
+  def _handle_connection_info_button_clicked(self):
+    self._pr2_interface.open_window(WindowTypes.ConnectionWindow)
 #
 #  def _handle_data_graphs_button_clicked:
 #    self._pr2_interface.open_window(WindowTypes.DataGraphsWindow)
