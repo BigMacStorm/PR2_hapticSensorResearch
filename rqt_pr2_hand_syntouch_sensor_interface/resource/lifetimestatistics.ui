@@ -18,7 +18,7 @@
     <rect>
      <x>40</x>
      <y>30</y>
-     <width>91</width>
+     <width>201</width>
      <height>16</height>
     </rect>
    </property>
@@ -31,7 +31,7 @@
     <rect>
      <x>40</x>
      <y>70</y>
-     <width>71</width>
+     <width>131</width>
      <height>16</height>
     </rect>
    </property>
@@ -44,7 +44,7 @@
     <rect>
      <x>40</x>
      <y>90</y>
-     <width>101</width>
+     <width>141</width>
      <height>16</height>
     </rect>
    </property>
@@ -57,7 +57,7 @@
     <rect>
      <x>40</x>
      <y>110</y>
-     <width>121</width>
+     <width>171</width>
      <height>16</height>
     </rect>
    </property>
@@ -70,7 +70,7 @@
     <rect>
      <x>40</x>
      <y>130</y>
-     <width>151</width>
+     <width>221</width>
      <height>16</height>
     </rect>
    </property>
@@ -83,7 +83,7 @@
     <rect>
      <x>40</x>
      <y>150</y>
-     <width>111</width>
+     <width>161</width>
      <height>16</height>
     </rect>
    </property>
@@ -96,7 +96,7 @@
     <rect>
      <x>40</x>
      <y>170</y>
-     <width>121</width>
+     <width>181</width>
      <height>16</height>
     </rect>
    </property>
@@ -107,10 +107,10 @@
   <widget class="QLabel" name="rvis_PR2UptimeLbl">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>270</x>
      <y>70</y>
-     <width>47</width>
-     <height>13</height>
+     <width>121</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">
@@ -120,10 +120,10 @@
   <widget class="QLabel" name="rvis_ConnectionUptimeLbl">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>270</x>
      <y>90</y>
-     <width>47</width>
-     <height>13</height>
+     <width>121</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">
@@ -133,10 +133,10 @@
   <widget class="QLabel" name="rvis_samplesLbl">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>270</x>
      <y>110</y>
-     <width>47</width>
-     <height>13</height>
+     <width>121</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">
@@ -146,10 +146,10 @@
   <widget class="QLabel" name="rviz_rateLbl">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>270</x>
      <y>130</y>
-     <width>47</width>
-     <height>13</height>
+     <width>121</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">
@@ -159,10 +159,10 @@
   <widget class="QLabel" name="rvis_actionsLbl">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>270</x>
      <y>150</y>
-     <width>47</width>
-     <height>13</height>
+     <width>121</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">
@@ -172,10 +172,10 @@
   <widget class="QLabel" name="rviz_performedLbl">
    <property name="geometry">
     <rect>
-     <x>200</x>
+     <x>270</x>
      <y>170</y>
-     <width>47</width>
-     <height>13</height>
+     <width>121</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">

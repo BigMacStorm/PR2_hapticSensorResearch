@@ -18,7 +18,7 @@
     <rect>
      <x>120</x>
      <y>20</y>
-     <width>121</width>
+     <width>191</width>
      <height>16</height>
     </rect>
    </property>
@@ -29,9 +29,9 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>30</x>
      <y>60</y>
-     <width>71</width>
+     <width>91</width>
      <height>16</height>
     </rect>
    </property>
@@ -42,8 +42,8 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>90</y>
+     <x>30</x>
+     <y>80</y>
      <width>47</width>
      <height>13</height>
     </rect>
@@ -57,7 +57,7 @@
     <rect>
      <x>70</x>
      <y>80</y>
-     <width>71</width>
+     <width>111</width>
      <height>22</height>
     </rect>
    </property>
@@ -82,7 +82,7 @@
     <rect>
      <x>40</x>
      <y>110</y>
-     <width>91</width>
+     <width>131</width>
      <height>16</height>
     </rect>
    </property>
@@ -180,10 +180,10 @@
   <widget class="QPushButton" name="lift_lift">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>240</y>
-     <width>75</width>
-     <height>23</height>
+     <x>10</x>
+     <y>230</y>
+     <width>181</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="text">
@@ -193,10 +193,10 @@
   <widget class="QPlainTextEdit" name="lift_textBox">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>210</x>
      <y>60</y>
-     <width>161</width>
-     <height>191</height>
+     <width>171</width>
+     <height>221</height>
     </rect>
    </property>
    <property name="plainText">
