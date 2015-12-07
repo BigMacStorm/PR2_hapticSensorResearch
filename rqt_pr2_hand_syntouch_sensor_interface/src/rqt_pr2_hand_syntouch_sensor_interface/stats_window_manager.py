@@ -31,3 +31,7 @@ class LifetimeStatsWindowManager:
     # Add widget to the user interface
     user_interface = pr2_interface.get_user_interface()
     user_interface.add_widget(self._widget)
+
+  def reopen(self):
+    user_interface = self._pr2_interface.get_user_interface()
+    user_interface.add_widget(self._widget)

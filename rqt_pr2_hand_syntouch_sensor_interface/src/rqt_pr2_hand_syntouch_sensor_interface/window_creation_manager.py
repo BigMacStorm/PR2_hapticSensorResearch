@@ -18,63 +18,55 @@ class WindowCreationManager:
   
   def __init__(self, pr2_interface):
     self._pr2_interface = pr2_interface
-    self._open_window_types = set()
-    self._open_window_managers = set()
+    self._open_windows = dict()
 
   def new_window_manager(self, window_type):
-    if window_type in self._open_window_types:
-      print 'That window is already open'
+    if window_type in self._open_windows:
+      print 'That window has already been opened but may have been closed'
+      print 'silently, trying to reopen...'
+      self._open_windows[window_type].reopen()
       return
 
     if window_type is WindowTypes.IndexWindow:
-      self._open_window_managers.add(IndexWindowManager(self._pr2_interface))
-      self._open_window_types.add(window_type)
+      self._open_windows[window_type] = (
+          IndexWindowManager(self._pr2_interface))
     elif window_type is WindowTypes.ConnectionWindow:
-      self._open_window_managers.add(
+      self._open_windows[window_type] = (
           ConnectionWindowManager(self._pr2_interface))
-      self._open_window_types.add(window_type)
     elif window_type is WindowTypes.SensorVisualizerWindow:
-      self._open_window_managers.add(SensorWindowManager(self._pr2_interface))
-      self._open_window_types.add(window_type)
+      self._open_windows[window_type] = (
+          SensorWindowManager(self._pr2_interface))
     elif window_type is WindowTypes.RobotVisualizerWindow:
-      self._open_window_managers.add(RobotWindowManager(self._pr2_interface))
-      self._open_window_types.add(window_type)
+      self._open_windows[window_type] = (
+          RobotWindowManager(self._pr2_interface))
     elif window_type is WindowTypes.LifetimeStatsWindow:
-      self._open_window_managers.add(
+      self._open_windows[window_type] = (
           LifetimeStatsWindowManager(self._pr2_interface))
-      self._open_window_types.add(window_type)
     elif window_type is WindowTypes.DataGraphsWindow:
-      self._open_window_managers.add(
+      self._open_windows[window_type] = (
           DataGraphsWindowManager(self._pr2_interface))
-      self._open_window_types.add(window_type)
     elif window_type is WindowTypes.RunProgramsWindow:
-      self._open_window_managers.add(
+      self._open_windows[window_type] = (
           RunProgramsWindowManager(self._pr2_interface))
-      self._open_window_types.add(window_type)
     # Below are windows that can be opened from the "Run Programs Window", which
     # has its own windows.
     elif window_type is WindowTypes.PulseAnalysisWindow:
-      self._open_window_managers.add(
+      self._open_windows[window_type] = (
           PulseAnalysisWindowManager(self._pr2_interface))
-      self._open_window_types.add(window_type)
     elif window_type is WindowTypes.LiftObjectWindow:
-      self._open_window_managers.add(
+      self._open_windows[window_type] = (
           LiftObjectWindowManager(self._pr2_interface))
-      self._open_window_types.add(window_type)
     elif window_type is WindowTypes.PlaceObjectWindow:
-      self._open_window_managers.add(
+      self._open_windows[window_type] = (
           PlaceObjectWindowManager(self._pr2_interface))
-      self._open_window_types.add(window_type)
     elif window_type is WindowTypes.RotateObjectWindow:
       raise NotImplementedError
 #      self._open_window_managers.add(
 #          RotateObjectWindowManager(self._pr2_interface))
 #      self._open_window_types.add(window_type)
     elif window_type is WindowTypes.SwitchHandsWindow:
-      self._open_window_managers.add(
+      self._open_windows[window_type] = (
           SwitchHandsWindowManager(self._pr2_interface))
-      self._open_window_types.add(window_type)
-     
     else:
       raise NotImplementedError
     
