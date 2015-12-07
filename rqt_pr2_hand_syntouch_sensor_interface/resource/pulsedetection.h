@@ -1,13 +1,13 @@
 #ifndef PULSEDETECTION_H
 #define PULSEDETECTION_H
 
-#include <QDialog>
+#include <QWidget>
 
 namespace Ui {
 class pulseDetection;
 }
 
-class pulseDetection : public QDialog
+class pulseDetection : public QWidget
 {
     Q_OBJECT
 

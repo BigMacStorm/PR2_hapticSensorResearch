@@ -1,13 +1,13 @@
 #ifndef PLACEOBJECT_H
 #define PLACEOBJECT_H
 
-#include <QDialog>
+#include <QWidget>
 
 namespace Ui {
 class placeObject;
 }
 
-class placeObject : public QDialog
+class placeObject : public QWidget
 {
     Q_OBJECT
 

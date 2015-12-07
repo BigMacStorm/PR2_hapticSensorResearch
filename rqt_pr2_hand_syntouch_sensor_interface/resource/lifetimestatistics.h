@@ -1,13 +1,13 @@
 #ifndef LIFETIMESTATISTICS_H
 #define LIFETIMESTATISTICS_H
 
-#include <QDialog>
+#include <QWidget>
 
 namespace Ui {
 class lifeTimeStatistics;
 }
 
-class lifeTimeStatistics : public QDialog
+class lifeTimeStatistics : public QWidget
 {
     Q_OBJECT
 

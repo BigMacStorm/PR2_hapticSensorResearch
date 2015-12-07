@@ -2,7 +2,7 @@
 #include "ui_rqtdockingwindow.h"
 
 rqtDockingWindow::rqtDockingWindow(QWidget *parent) :
-    QDialog(parent),
+    QWidget(parent),
     ui(new Ui::rqtDockingWindow)
 {
     ui->setupUi(this);

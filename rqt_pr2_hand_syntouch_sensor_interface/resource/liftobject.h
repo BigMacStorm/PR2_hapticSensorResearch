@@ -1,13 +1,13 @@
 #ifndef LIFTOBJECT_H
 #define LIFTOBJECT_H
 
-#include <QDialog>
+#include <QWidget>
 
 namespace Ui {
 class liftObject;
 }
 
-class liftObject : public QDialog
+class liftObject : public QWidget
 {
     Q_OBJECT
 

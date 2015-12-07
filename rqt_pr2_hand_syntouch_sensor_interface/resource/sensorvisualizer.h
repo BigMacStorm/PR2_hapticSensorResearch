@@ -1,13 +1,13 @@
 #ifndef SENSORVISUALIZER_H
 #define SENSORVISUALIZER_H
 
-#include <QDialog>
+#include <QWidget>
 
 namespace Ui {
 class SensorVisualizer;
 }
 
-class SensorVisualizer : public QDialog
+class SensorVisualizer : public QWidget
 {
     Q_OBJECT
 

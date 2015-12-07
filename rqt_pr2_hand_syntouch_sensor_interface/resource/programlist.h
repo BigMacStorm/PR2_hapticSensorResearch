@@ -1,13 +1,13 @@
 #ifndef PROGRAMLIST_H
 #define PROGRAMLIST_H
 
-#include <QDialog>
+#include <QWidget>
 
 namespace Ui {
 class programList;
 }
 
-class programList : public QDialog
+class programList : public QWidget
 {
     Q_OBJECT
 

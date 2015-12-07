@@ -2,7 +2,7 @@
 #include "ui_placeobject.h"
 
 placeObject::placeObject(QWidget *parent) :
-    QDialog(parent),
+    QWidget(parent),
     ui(new Ui::placeObject)
 {
     ui->setupUi(this);

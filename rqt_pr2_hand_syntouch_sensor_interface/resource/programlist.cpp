@@ -2,7 +2,7 @@
 #include "ui_programlist.h"
 
 programList::programList(QWidget *parent) :
-    QDialog(parent),
+    QWidget(parent),
     ui(new Ui::programList)
 {
     ui->setupUi(this);

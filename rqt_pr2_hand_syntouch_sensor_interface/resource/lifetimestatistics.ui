@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>lifeTimeStatistics</class>
- <widget class="QDialog" name="lifeTimeStatistics">
+ <widget class="QWidget" name="lifeTimeStatistics">
   <property name="geometry">
    <rect>
     <x>0</x>

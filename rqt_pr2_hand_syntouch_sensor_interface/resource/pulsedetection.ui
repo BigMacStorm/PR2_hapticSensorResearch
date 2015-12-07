@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>pulseDetection</class>
- <widget class="QDialog" name="pulseDetection">
+ <widget class="QWidget" name="pulseDetection">
   <property name="geometry">
    <rect>
     <x>0</x>

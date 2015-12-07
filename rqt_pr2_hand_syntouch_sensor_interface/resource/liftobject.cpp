@@ -2,7 +2,7 @@
 #include "ui_liftobject.h"
 
 liftObject::liftObject(QWidget *parent) :
-    QDialog(parent),
+    QWidget(parent),
     ui(new Ui::liftObject)
 {
     ui->setupUi(this);

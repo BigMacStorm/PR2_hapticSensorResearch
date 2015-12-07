@@ -2,7 +2,7 @@
 #include "ui_pr2robotvisualizer.h"
 
 PR2RobotVisualizer::PR2RobotVisualizer(QWidget *parent) :
-    QDialog(parent),
+    QWidget(parent),
     ui(new Ui::PR2RobotVisualizer)
 {
     ui->setupUi(this);

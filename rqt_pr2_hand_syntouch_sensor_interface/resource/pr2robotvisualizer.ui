@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>PR2RobotVisualizer</class>
- <widget class="QDialog" name="PR2RobotVisualizer">
+ <widget class="QWidget" name="PR2RobotVisualizer">
   <property name="geometry">
    <rect>
     <x>0</x>

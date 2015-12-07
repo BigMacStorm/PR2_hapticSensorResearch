@@ -2,7 +2,7 @@
 #include "ui_swaphands.h"
 
 swapHands::swapHands(QWidget *parent) :
-    QDialog(parent),
+    QWidget(parent),
     ui(new Ui::swapHands)
 {
     ui->setupUi(this);

@@ -1,13 +1,13 @@
 #ifndef PR2ROBOTVISUALIZER_H
 #define PR2ROBOTVISUALIZER_H
 
-#include <QDialog>
+#include <QWidget>
 
 namespace Ui {
 class PR2RobotVisualizer;
 }
 
-class PR2RobotVisualizer : public QDialog
+class PR2RobotVisualizer : public QWidget
 {
     Q_OBJECT
 

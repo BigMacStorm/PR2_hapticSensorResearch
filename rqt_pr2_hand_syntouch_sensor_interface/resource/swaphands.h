@@ -1,13 +1,13 @@
 #ifndef SWAPHANDS_H
 #define SWAPHANDS_H
 
-#include <QDialog>
+#include <QWidget>
 
 namespace Ui {
 class swapHands;
 }
 
-class swapHands : public QDialog
+class swapHands : public QWidget
 {
     Q_OBJECT
 

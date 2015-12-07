@@ -2,7 +2,7 @@
 #include "ui_datagraphs.h"
 
 dataGraphs::dataGraphs(QWidget *parent) :
-    QDialog(parent),
+    QWidget(parent),
     ui(new Ui::dataGraphs)
 {
     ui->setupUi(this);

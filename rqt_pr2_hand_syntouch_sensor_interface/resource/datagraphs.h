@@ -1,13 +1,13 @@
 #ifndef DATAGRAPHS_H
 #define DATAGRAPHS_H
 
-#include <QDialog>
+#include <QWidget>
 
 namespace Ui {
 class dataGraphs;
 }
 
-class dataGraphs : public QDialog
+class dataGraphs : public QWidget
 {
     Q_OBJECT
 

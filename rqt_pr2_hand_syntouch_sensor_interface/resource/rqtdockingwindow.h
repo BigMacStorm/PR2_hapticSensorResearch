@@ -1,13 +1,13 @@
 #ifndef RQTDOCKINGWINDOW_H
 #define RQTDOCKINGWINDOW_H
 
-#include <QDialog>
+#include <QWidget>
 
 namespace Ui {
 class rqtDockingWindow;
 }
 
-class rqtDockingWindow : public QDialog
+class rqtDockingWindow : public QWidget
 {
     Q_OBJECT
 

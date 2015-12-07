@@ -2,7 +2,7 @@
 #include "ui_sensorvisualizer.h"
 
 SensorVisualizer::SensorVisualizer(QWidget *parent) :
-    QDialog(parent),
+    QWidget(parent),
     ui(new Ui::SensorVisualizer)
 {
     ui->setupUi(this);
