@@ -1,5 +1,5 @@
 <library path="src">
-  <class name="Index" type="rqt_pr2_hand_syntouch_sensor_interface.interface.Index" base_class_type="rqt_gui_py::Plugin">
+  <class name="Interface" type="rqt_pr2_hand_syntouch_sensor_interface.interface.PR2Interface" base_class_type="rqt_gui_py::Plugin">
     <description>
       This plugin is designed to ease the use of a PR2 robot that has been
       fitted with BioTac Syntouch sensors. The plugin consists of multiple
@@ -7,15 +7,12 @@
       that perform visualization, data analysis, and PR2 movement.
     </description>
     <qtgui>
-      <!-- optional grouping...
       <group>
-        <label>Group</label>
+        <label>Pr2 Hand and Syntouch Sensor Real-Time Interface</label>
+        <icon type="theme">folder</icon>
       </group>
-      <group>
-        <label>Subgroup</label>
-      </group>
-      -->
       <label>PR2 Hand and Syntouch Sensor Real-Time Interface</label>
+      <icon type="theme">media-plaback-start</icon>
       <statustip>Plugin to be used with a PR2 robot that has BioTac Syntouch Sensors installed. </statustip>
     </qtgui>
   </class>
