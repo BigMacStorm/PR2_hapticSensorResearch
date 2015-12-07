@@ -46,7 +46,7 @@ class RunProgramsWindowManager:
         self._handle_rotate_object_button_clicked)
 
     self._widget.SwitchHandsButton.clicked.connect(
-        self._handle_robot_visualizer_button_clicked)
+        self._handle_switch_hands_button_clicked)
 
   def _handle_take_pulse_button_clicked(self):
     self._pr2_interface.open_window(WindowTypes.PulseAnalysisWindow)
