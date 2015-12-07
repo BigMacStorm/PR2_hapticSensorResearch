@@ -1,5 +1,5 @@
 #include "widget.h"
-#include "ui_index.h"
+#include "ui_Index.h"
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),

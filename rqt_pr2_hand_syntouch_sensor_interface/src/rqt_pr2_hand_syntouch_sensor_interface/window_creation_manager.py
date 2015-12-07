@@ -1,6 +1,8 @@
 from .index_window_manager import IndexWindowManager
 from .connection_window_manager import ConnectionWindowManager
 from .sensor_window_manager import SensorWindowManager
+from .run_programs_window_manager import RunProgramsWindowManager
+
 from .window_types import WindowTypes
 
 class WindowCreationManager:
@@ -24,6 +26,9 @@ class WindowCreationManager:
     elif window_type is WindowTypes.SensorVisualizerWindow:
       self._open_window_managers.add(SensorWindowManager(self._pr2_interface))
       self._open_window_types.add(window_type)
+    elif window_type is WindowTypes.RunProgramsWindow:
+      self._open_window_managers.add(RunProgramsWindowManager(self._pr2_interface))
+      self._open_window_types.add(window_type)
     else:
       raise NotImplementedError
     
@@ -33,5 +38,3 @@ class WindowCreationManager:
   def shutdown_all_windows(self):
     for window in self._open_windows():
       self.shutdown_window(window)
-
-

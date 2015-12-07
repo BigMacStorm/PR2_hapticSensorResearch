@@ -43,8 +43,8 @@ class IndexWindowManager:
     self._widget.SensorVisualizerButton.clicked.connect(
         self._handle_sensor_visualizer_button_clicked)
 #
-#    self._widget.RunProgramsButton.clicked.connect(
-#        self._handle_run_programs_button_clicked)
+    self._widget.RunProgramsButton.clicked.connect(
+        self._handle_run_programs_button_clicked)
 #
 #    self._widget.RobotVisualizerButton.clicked.connect(
 #        self._handle_robot_visualizer_button_clicked)
@@ -61,8 +61,8 @@ class IndexWindowManager:
   def _handle_sensor_visualizer_button_clicked(self):
     self._pr2_interface.open_window(WindowTypes.SensorVisualizerWindow)
 #
-#  def _handle_run_programs_button_clicked:
-#    self._pr2_interface.open_window(WindowTypes.RunProgramsWindow)
+  def _handle_run_programs_button_clicked(self):
+    self._pr2_interface.open_window(WindowTypes.RunProgramsWindow)
 #
 #  def _handle_robot_visualizer_button_clicked:
 #    self._pr2_interface.open_window(WindowTypes.RobotVisualizerWindow)

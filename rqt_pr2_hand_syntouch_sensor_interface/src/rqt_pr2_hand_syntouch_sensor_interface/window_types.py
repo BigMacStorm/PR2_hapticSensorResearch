@@ -1,4 +1,5 @@
 class WindowTypes:
   IndexWindow, ConnectionWindow, RunProgramsWindow, DataGraphsWindow, \
   LifetimeStatsWindow, SensorVisualizerWindow, RobotVisualizerWindow, \
-  PulseAnalysisWindow, GrabObjectWindow, SwitchHandsWindow = range(10)
+  PulseAnalysisWindow, LiftObjectWindow, PlaceObjectWindow, \
+  RotateObjectWindow, SwitchHandsWindow = range(12)
