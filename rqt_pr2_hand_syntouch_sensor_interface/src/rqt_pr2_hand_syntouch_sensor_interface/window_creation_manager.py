@@ -1,5 +1,6 @@
 from .index_window_manager import IndexWindowManager
 from .connection_window_manager import ConnectionWindowManager
+from .sensor_window_manager import SensorWindowManager
 from .window_types import WindowTypes
 
 class WindowCreationManager:
