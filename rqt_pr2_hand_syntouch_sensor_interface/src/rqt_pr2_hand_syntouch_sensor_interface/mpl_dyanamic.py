@@ -55,36 +55,37 @@ class MyDynamicMplCanvas(MyMplCanvas):
     self.timer.start(1000)
 
   def update_figure(self):
+    temp = self.pr2_interface.get_data_range(-5)
+    p_range = []
+    x_range = []
+    y_range = []
+    z_range = []
+    t_range = []
+    if not temp:
+      return
+    current_time = temp[-1].get_t_recv()
     if self.type == 'x':
       print "update x graph"
-      temp = self.pr2_interface.get_data_range(-5)
-      x_range = []
-      t_range = []
-      current_time = temp[-1].get_t_recv()
       for x in temp:
         x_range.append(x.get_x())
         t_range.append(x.get_t_recv() - current_time)
       self.axes.plot(t_range, x_range, 'r')
-      self.draw()
     elif self.type == 'y':
       print "update y graph"
-      temp = self.pr2_interface.get_data_range(-5)
-      y_range = []
-      t_range = []
-      current_time = temp[-1].get_t_recv()
       for x in temp:
         y_range.append(x.get_y())
         t_range.append(x.get_t_recv() - current_time)
       self.axes.plot(t_range, y_range, 'r')
-      self.draw()
     elif self.type == 'z':
       print "update z graph"
-      temp = self.pr2_interface.get_data_range(-5)
-      z_range = []
-      t_range = []
-      current_time = temp[-1].get_t_recv()
       for x in temp:
         z_range.append(x.get_z())
         t_range.append(x.get_t_recv() - current_time)
       self.axes.plot(t_range, z_range, 'r')
-      self.draw()
+    elif self.type == 'p':
+      print "update p graph"
+      for x in temp:
+        p_range.append(x.get_force())
+        t_range.append(x.get_t_recv() - current_time)
+      self.axes.plot(t_range, p_range, 'r')
+    self.draw()
