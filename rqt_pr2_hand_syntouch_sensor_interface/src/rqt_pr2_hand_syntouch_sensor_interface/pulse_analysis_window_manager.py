@@ -5,16 +5,15 @@ import rospkg
 from python_qt_binding import loadUi
 from python_qt_binding.QtGui import QWidget
 
-from .window_types import WindowTypes
+from .window_manager import WindowManager
 
-class PulseAnalysisWindowManager:
+class PulseAnalysisWindowManager(WindowManager):
 
   def __init__(self, pr2_interface):
-    self._pr2_interface = pr2_interface
-
-    # Create QWidget object (this is object that represents the window
-    # that the user actually sees).
-    self._widget = QWidget()
+    # Initialize the WindowManager base class. The WindowManager class
+    # creates the _widget object that will be used by this window and
+    # guarantees successful shutdown of rqt upon program termination.
+    super(PulseAnalysisWindowManager, self).__init__(pr2_interface)
 
     # Get path to UI file which should be in the "resource" folder of this package
     ui_file = os.path.join(

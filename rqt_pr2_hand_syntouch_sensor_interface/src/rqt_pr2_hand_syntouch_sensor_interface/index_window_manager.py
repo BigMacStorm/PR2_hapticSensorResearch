@@ -7,15 +7,15 @@ from python_qt_binding import loadUi
 from python_qt_binding.QtGui import QWidget
 
 from .window_types import WindowTypes
+from .window_manager import WindowManager
 
-class IndexWindowManager:
+class IndexWindowManager(WindowManager):
 
   def __init__(self, pr2_interface):
-    self._pr2_interface = pr2_interface
-
-    # Create QWidget object (this is object that represents the window
-    # that the user actually sees).
-    self._widget = QWidget()
+    # Initialize the WindowManager base class. The WindowManager class
+    # creates the _widget object that will be used by this window and
+    # guarantees successful shutdown of rqt upon program termination.
+    super(IndexWindowManager, self).__init__(pr2_interface)
 
     # Get path to UI file which should be in the "resource" folder of this package
     ui_file = os.path.join(
@@ -54,7 +54,6 @@ class IndexWindowManager:
         self._handle_lifetime_statistics_button_clicked)
 
     self._worker = threading.Thread(target=self.update_labels)
-    self._worker.daemon = True
     self._worker.start()
 
   def _handle_connection_info_button_clicked(self):
@@ -78,7 +77,7 @@ class IndexWindowManager:
   def update_labels(self):
     rate = rospy.Rate(5) # 10hz
     last_data_point = None
-    while not rospy.is_shutdown():
+    while not rospy.is_shutdown() and not self._destroyed:
       current_data_point = self._pr2_interface.get_most_recent_data()
       if last_data_point == current_data_point or not last_data_point:
         self._disconnected = True

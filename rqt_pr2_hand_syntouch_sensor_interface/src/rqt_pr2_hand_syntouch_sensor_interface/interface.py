@@ -55,8 +55,7 @@ class PR2Interface(Plugin):
       return self._sensor_manager.get_data()
 
     def shutdown_plugin(self):
-        # TODO unregister all publishers here
-        pass
+      self._window_creation_manager.shutdown_all_windows()
 
     def save_settings(self, plugin_settings, instance_settings):
         # TODO save intrinsic configuration, usually using:

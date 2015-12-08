@@ -71,8 +71,8 @@ class WindowCreationManager:
       raise NotImplementedError
     
   def shutdown_window(self, window_type):
-    pass
+    self._open_windows[window_type].shutdown()
 
   def shutdown_all_windows(self):
-    for window in self._open_windows():
+    for window in self._open_windows:
       self.shutdown_window(window)

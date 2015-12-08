@@ -1,6 +1,8 @@
 import rospy
 from std_msgs.msg import String
 
+from .data_time_tick import DataTimeTick
+
 class SensorManager:
   
   def __init__(self, pr2_interface):
@@ -15,11 +17,11 @@ class SensorManager:
 
   # Save data here for possibly writing to file in the future.
   def update_data(self, data):
-    self._data.append(data)
+    data_time_tick = DataTimeTick(data.data)
+    self._data.append(data_time_tick)
 
   def get_data(self):
     return self._data[-1]
     
-  def get_data_range(self, t0, t1):
-    #TODO implement get data range.
+  def get_data_range(self, t0, t1=None):
     return []
