@@ -48,7 +48,7 @@ class MockPR2:
     t_now = t_now / 1e9
 
     # generate the x, y, and z position information using sin, cos, and tan
-    data_time_tick['x'] = 10*math.sin(t_now*2*math.pi/5))
+    data_time_tick['x'] = 10*math.sin(t_now*2*math.pi/5)
     data_time_tick['y'] = 10*math.cos(t_now*2*math.pi/5)
     data_time_tick['z'] = 10*math.tan(t_now*2*math.pi/5)
 
