@@ -5,6 +5,7 @@ import rospkg
 from python_qt_binding import loadUi
 from python_qt_binding.QtGui import QWidget
 
+from .action_types import ActionTypes
 from .window_manager import WindowManager
 
 # Class that handles the place object window and ui
@@ -36,6 +37,31 @@ class PlaceObjectWindowManager(WindowManager):
     # Add widget to the user interface
     user_interface = pr2_interface.get_user_interface()
     user_interface.add_widget(self._widget)
+    
+    # Register a listener for the place button.
+    self._widget.PlaceButton.clicked.connect(self._handle_place_button_clicked)
+
+  def _handle_place_button_clicked(self):
+    try:
+      # Obtain the coordinates of the object to place (relative to the PR2).
+      # Data comes from textboxes on the interface.
+      object_x_coordinate = float(self._widget.XTextBox.toPlainText())
+      object_y_coordinate = float(self._widget.YTextBox.toPlainText())
+      object_z_coordinate = float(self._widget.ZTextBox.toPlainText())
+      hand_to_use = self._widget.ComboBox.currentText()
+
+      self._widget.OutputTextBox.document().setPlainText(
+          'Attempting to place object at coordinate (%s, %s, %s) with %s'
+          % (object_x_coordinate, object_y_coordinate, object_z_coordinate,
+             hand_to_use))
+    except ValueError:
+      self._widget.OutputTextBox.document().setPlainText(
+          'Parameters must be floats.')
+
+    # TODO: Add code to call the PR2_Controller to move the hand, control the
+    # hand to lift the object, etc.
+    self._pr2_interface.notify_action_performed(ActionTypes.PlaceObject)
+    
 
   # calls the function to readd the widgets if the window was closed
   def reopen(self):

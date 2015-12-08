@@ -46,13 +46,17 @@ class SensorManager:
   # t1 are times (in seconds) relative to the current time that
   # data is requested for (e.g. they should be negative).
   # Args:
-  #	t0: start of requested time t1: end of requested time
+  #	   t0: start of requested time 
+  #    t1: end of requested time
   def get_data_range(self, t0, t1=None):
-    # TODO test this function for correctness in edge cases.
-    # perform a binary search for t0, t1...
+    # Handle the case where there is no data yet.
+    if not self._data:
+      return []
+
     t0_time = rospy.get_rostime().to_nsec() + t0 * 1e9
     left = 0
     right = len(self._data) - 1
+
     # find t0 in the data list
     while(left < right):
       mid = (left + right) / 2

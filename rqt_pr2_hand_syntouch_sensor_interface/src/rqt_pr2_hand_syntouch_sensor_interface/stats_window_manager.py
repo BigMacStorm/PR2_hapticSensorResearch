@@ -27,7 +27,8 @@ class LifetimeStatsWindowManager(WindowManager):
     self._disconnected = True
 
     # Initialize action stats
-    self._action_occurence_counter = [0 in xrange(NUM_ACTION_TYPES)]
+    self._action_occurence_counter = [0 for i in xrange(NUM_ACTION_TYPES)]
+    print self._action_occurence_counter
     self._total_action_count = 0
 
     # Get path to UI file which should be in the "resource" folder of this package
@@ -144,13 +145,13 @@ class LifetimeStatsWindowManager(WindowManager):
         most_performed_action_count = self._action_occurence_counter[i]
 
     if most_performed_action == ActionTypes.LiftObject:
-      action_string = 'LiftObject'
+      action_string = 'LiftObject (%d times)' % most_performed_action_count
     elif most_performed_action == ActionTypes.PlaceObject:
-      action_string = 'PlaceObject'
+      action_string = 'PlaceObject (%d times)' % most_performed_action_count
     elif most_performed_action == ActionTypes.RotateObject:
-      action_string = 'RotateObject'
+      action_string = 'RotateObject (%d times)' % most_performed_action_count
     elif most_performed_action == ActionTypes.SwitchHands:
-      action_string = 'SwitchHands'
+      action_string = 'SwitchHands (%d times)' % most_performed_action_count
     else:
       action_string = 'None'
 

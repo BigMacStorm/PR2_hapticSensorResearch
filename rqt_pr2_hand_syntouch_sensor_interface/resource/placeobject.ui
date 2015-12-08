@@ -26,7 +26,7 @@
     <string>Use:</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="place_xCoord">
+  <widget class="QPlainTextEdit" name="XTextBox">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -34,6 +34,9 @@
      <width>91</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
    </property>
    <property name="plainText">
     <string>0.0</string>
@@ -52,7 +55,7 @@
     <string>Object Location:</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="place_yCoord">
+  <widget class="QPlainTextEdit" name="YTextBox">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -60,6 +63,9 @@
      <width>91</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
    </property>
    <property name="plainText">
     <string>0.0</string>
@@ -91,7 +97,7 @@
     <string>Y:</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="place_zCoord">
+  <widget class="QPlainTextEdit" name="ZTextBox">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -99,6 +105,9 @@
      <width>91</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
    </property>
    <property name="plainText">
     <string>0.0</string>
@@ -143,7 +152,7 @@
     <string>Parameters</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="place_comboBox">
+  <widget class="QComboBox" name="ComboBox">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -168,7 +177,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QPushButton" name="place_place">
+  <widget class="QPushButton" name="PlaceButton">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -181,7 +190,7 @@
     <string>Place</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="place_textBox">
+  <widget class="QPlainTextEdit" name="OutputTextBox">
    <property name="geometry">
     <rect>
      <x>210</x>
