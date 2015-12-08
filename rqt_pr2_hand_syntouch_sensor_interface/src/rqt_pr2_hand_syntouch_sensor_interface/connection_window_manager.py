@@ -9,12 +9,17 @@ from python_qt_binding.QtGui import QWidget
 
 from .window_manager import WindowManager
 
+# class that handles the connection window and ui
 class ConnectionWindowManager(WindowManager):
 
+  # Initialize the WindowManager base class. The WindowManager class
+  # creates the _widget object that will be used by this window and
+  # guarantees successful shutdown of rqt upon program termination.
+  # This function will initialize the window and all widgets attached to this window.
+  # Args:
+  #	   pr2_interface: the single pr2 interface plug in object
   def __init__(self, pr2_interface):
-    # Initialize the WindowManager base class. The WindowManager class
-    # creates the _widget object that will be used by this window and
-    # guarantees successful shutdown of rqt upon program termination.
+
     super(ConnectionWindowManager, self).__init__(pr2_interface)
 
     # Get path to UI file which should be in the "resource" folder of this package
@@ -41,6 +46,9 @@ class ConnectionWindowManager(WindowManager):
     self._worker = threading.Thread(target=self.update_labels)
     self._worker.start()
 
+  # Checks on the connection with the PR2 and updates the displayed info
+  # if there isn't any new data coming in it calls set_label_text_disconnected
+  # otherwise it calls set_label_text_connected
   def update_labels(self):
     rate = rospy.Rate(5) # 5hz
     last_data_point = None
@@ -54,6 +62,8 @@ class ConnectionWindowManager(WindowManager):
       rate.sleep()
       last_data_point = current_data_point
 
+  # sets all of the displayed information to show that
+  # the PR2 is disconnected
   def set_label_text_disconnected(self):
     self._widget.PR2StatusLabel.setText("PR2 Status: Disconnected")
     self._widget.SyntouchStatusLabel.setText(
@@ -63,6 +73,8 @@ class ConnectionWindowManager(WindowManager):
     self._widget.DownloadRateLabel.setText('Download rate: 0 bytes/s')
     self._widget.LatencyLabel.setText('Latency: N/a ms')
 
+  # sets all of the displayed information to show that
+  # the PR2 is connected
   def set_label_text_connected(self):
     self._widget.PR2StatusLabel.setText("PR2 Status: Connected")
     self._widget.SyntouchStatusLabel.setText(
@@ -91,6 +103,7 @@ class ConnectionWindowManager(WindowManager):
     self._widget.LatencyLabel.setText('Latency: %s ns (%s ms)' 
         % (str(latency), str(latency/1e6)))
 
+  # calls the function to readd the widgets if the window was closed
   def reopen(self):
     user_interface = self._pr2_interface.get_user_interface()
     user_interface.add_widget(self._widget)

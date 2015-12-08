@@ -14,12 +14,22 @@ from .switch_hands_window_manager import SwitchHandsWindowManager
 
 from .window_types import WindowTypes
 
+# Class that handles the creation of all windows
 class WindowCreationManager:
   
+  # Initializes the Window Creation Manager class.
+  # creates a dictionary for all of the open windows
+  # Args:
+  # 	pr2_interface: the single pr2 interface plug in object
   def __init__(self, pr2_interface):
     self._pr2_interface = pr2_interface
     self._open_windows = dict()
 
+  # checks to see if a window of the passed type is already created
+  # if it is it will print a message and try to reopen it
+  # otherwise it will create one and add it to the windows dictionary
+  # Args:
+  # 	window_type: type of window being opened
   def new_window_manager(self, window_type):
     if window_type in self._open_windows:
       print 'That window has already been opened but may have been closed'
@@ -70,9 +80,13 @@ class WindowCreationManager:
     else:
       raise NotImplementedError
     
+  # has the window of a specified type call its shutdown function
+  # Args:
+  # 	window_type: type of window being shutdown
   def shutdown_window(self, window_type):
     self._open_windows[window_type].shutdown()
 
+  # calls shutdown_window for all current windows
   def shutdown_all_windows(self):
     for window in self._open_windows:
       self.shutdown_window(window)
