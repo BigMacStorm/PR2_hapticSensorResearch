@@ -7,7 +7,7 @@ from python_qt_binding.QtGui import QWidget
 
 from .window_manager import WindowManager
 
-# Class that handles the lift object window and ui
+# Class that handles the place object window and ui
 class PlaceObjectWindowManager(WindowManager):
 
   # Initialize the WindowManager base class. The WindowManager class
