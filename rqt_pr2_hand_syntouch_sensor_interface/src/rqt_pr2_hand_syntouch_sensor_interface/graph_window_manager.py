@@ -47,11 +47,15 @@ class DataGraphsWindowManager(WindowManager):
     self._widget.setWindowTitle('Data Graphs')
 
     dc = MyDynamicMplCanvas()
+    dc.set_pr2_interface(self._pr2_interface)
+    dc.set_type('x')
     self._widget.xMPLlayout.addWidget(dc)
-    dc = MyDynamicMplCanvas()
+    """dc = MyDynamicMplCanvas()
+    dc.set_type('y')
     self._widget.yMPLlayout.addWidget(dc)
     dc = MyDynamicMplCanvas()
-    self._widget.zMPLlayout.addWidget(dc)
+    dc.set_type('z')
+    self._widget.zMPLlayout.addWidget(dc)"""
 
     # Add widget to the user interface
     user_interface = pr2_interface.get_user_interface()
