@@ -10,7 +10,7 @@ class SensorWindowManager(WindowManager):
 
   # This function will initialize the window and all widgets attached to this window.
   # Args:
-  #	pr2_interface: the single pr2 interface plug in object
+  #	   pr2_interface: the single pr2 interface plug in object
   def __init__(self, pr2_interface):
     # Initialize the WindowManager base class. The WindowManager class
     # creates the _widget object that will be used by this window and
@@ -27,8 +27,8 @@ class SensorWindowManager(WindowManager):
 
     # Give QObjects reasonable names
     self._widget.setObjectName('SensorVisualizerWindow')
-    self._widget.setWindowTitle(
-        'Sensor Visualizer')
+
+    self._widget.setWindowTitle('Sensor Visualizer')
 
     # Add widget to the user interface
     user_interface = pr2_interface.get_user_interface()

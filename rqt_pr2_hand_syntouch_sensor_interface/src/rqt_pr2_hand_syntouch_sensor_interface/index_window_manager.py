@@ -110,7 +110,6 @@ class IndexWindowManager(WindowManager):
       # just for testing purposes to use with the mock_pr2.py which is simulating
       # incoming pr2 data.
       if last_data_point == current_data_point or not last_data_point:
-        self._disconnected = True
         self._widget.label.setText("PR2 Status: Disconnected")
         self._widget.label_2.setText("Syntouch (fingers) Status: Disconnected")
       else:

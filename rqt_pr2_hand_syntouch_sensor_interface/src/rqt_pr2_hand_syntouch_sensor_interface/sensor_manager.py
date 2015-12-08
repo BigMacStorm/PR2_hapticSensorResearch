@@ -83,3 +83,6 @@ class SensorManager:
     t1_index = mid
 
     return self._data[t0_index:t1_index]
+
+  def count_data_time_ticks(self):
+    return len(self._data)
