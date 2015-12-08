@@ -125,6 +125,10 @@ class LifetimeStatsWindowManager(WindowManager):
   # been performed. If the window performing the action forgets to call this
   # function then the action won't be counted in the stats.
   def notify_action_performed(self, action_type):
+    print "asdfasdfasdfasdf"
+    print action_type
+    print NUM_ACTION_TYPES
+    print self._action_occurence_counter
     self._action_occurence_counter[action_type] += 1
     self._total_action_count += 1
 

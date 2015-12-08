@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     liftobject.cpp \
     placeobject.cpp \
     swaphands.cpp \
-    rqtdockingwindow.cpp
+    rqtdockingwindow.cpp \
+    rotateobject.cpp
 
 HEADERS  += mainwindow.h \
     sensorvisualizer.h \
@@ -39,7 +40,8 @@ HEADERS  += mainwindow.h \
     liftobject.h \
     placeobject.h \
     swaphands.h \
-    rqtdockingwindow.h
+    rqtdockingwindow.h \
+    rotateobject.h
 
 FORMS    += mainwindow.ui \
     sensorvisualizer.ui \
@@ -53,6 +55,7 @@ FORMS    += mainwindow.ui \
     liftobject.ui \
     placeobject.ui \
     swaphands.ui \
-    rqtdockingwindow.ui
+    rqtdockingwindow.ui \
+    rotateobject.ui
 
 DISTFILES +=

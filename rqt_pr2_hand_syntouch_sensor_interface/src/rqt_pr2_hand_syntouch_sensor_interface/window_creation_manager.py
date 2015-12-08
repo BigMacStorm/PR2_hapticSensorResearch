@@ -8,7 +8,7 @@ from .stats_window_manager import LifetimeStatsWindowManager
 from .pulse_analysis_window_manager import PulseAnalysisWindowManager
 from .lift_object_window_manager import LiftObjectWindowManager
 from .place_object_window_manager import PlaceObjectWindowManager
-#from .rotate_object_window_manager import RotateObjectWindowManager
+from .rotate_object_window_manager import RotateObjectWindowManager
 from .switch_hands_window_manager import SwitchHandsWindowManager
 
 
@@ -70,10 +70,8 @@ class WindowCreationManager:
       self._open_windows[window_type] = (
           PlaceObjectWindowManager(self._pr2_interface))
     elif window_type is WindowTypes.RotateObjectWindow:
-      raise NotImplementedError
-#      self._open_window_managers.add(
-#          RotateObjectWindowManager(self._pr2_interface))
-#      self._open_window_types.add(window_type)
+      self._open_windows[window_type] = (
+          RotateObjectWindowManager(self._pr2_interface))
     elif window_type is WindowTypes.SwitchHandsWindow:
       self._open_windows[window_type] = (
           SwitchHandsWindowManager(self._pr2_interface))
