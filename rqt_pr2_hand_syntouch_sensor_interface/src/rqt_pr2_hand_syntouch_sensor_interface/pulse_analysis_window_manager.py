@@ -36,7 +36,7 @@ class PulseAnalysisWindowManager(WindowManager):
 
     dc1 = MyDynamicMplCanvas()
     dc1.set_pr2_interface(self._pr2_interface)
-    dc1.set_type('x')
+    dc1.set_type('p')
     self._widget.pulse_layout.addWidget(dc1)
 
     # Add widget to the user interface
