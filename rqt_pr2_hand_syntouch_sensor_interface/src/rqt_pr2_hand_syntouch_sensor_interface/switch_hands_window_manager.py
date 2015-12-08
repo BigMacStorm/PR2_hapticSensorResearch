@@ -5,6 +5,7 @@ import rospkg
 from python_qt_binding import loadUi
 from python_qt_binding.QtGui import QWidget
 
+from .action_types import ActionTypes
 from .window_manager import WindowManager
 
 # Class that handles the switch hands window and ui
@@ -35,6 +36,20 @@ class SwitchHandsWindowManager(WindowManager):
     # Add widget to the user interface
     user_interface = pr2_interface.get_user_interface()
     user_interface.add_widget(self._widget)
+
+    # Register a listener for the lift button.
+    self._widget.SwitchHandsButton.clicked.connect(
+        self._handle_switch_hands_button_clicked)
+
+  # function to handle the switch hands button being clicked.
+  def _handle_switch_hands_button_clicked(self):
+    # Notify the user that his action has been processed.
+    self._widget.OutputTextBox.document().setPlainText(
+        'Attempting to switch object from one hand to another')
+
+    # TODO: Add code to call the PR2_Controller to move the hand, control the
+    # hand to lift the object, etc.
+    self._pr2_interface.notify_action_performed(ActionTypes.SwitchHands)
 
   # calls the function to readd the widgets if the window was closed
   def reopen(self):

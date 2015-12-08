@@ -26,7 +26,7 @@
     <string>PR2 Swap Hands Program</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="swap_swap">
+  <widget class="QPushButton" name="SwitchHandsButton">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -39,7 +39,7 @@
     <string>Swap</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="swap_textBox">
+  <widget class="QPlainTextEdit" name="OutputTextBox">
    <property name="geometry">
     <rect>
      <x>210</x>

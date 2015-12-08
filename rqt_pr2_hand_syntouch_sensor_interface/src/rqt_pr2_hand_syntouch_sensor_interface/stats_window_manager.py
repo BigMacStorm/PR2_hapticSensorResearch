@@ -28,7 +28,6 @@ class LifetimeStatsWindowManager(WindowManager):
 
     # Initialize action stats
     self._action_occurence_counter = [0 for i in xrange(NUM_ACTION_TYPES)]
-    print self._action_occurence_counter
     self._total_action_count = 0
 
     # Get path to UI file which should be in the "resource" folder of this package
@@ -126,10 +125,6 @@ class LifetimeStatsWindowManager(WindowManager):
   # been performed. If the window performing the action forgets to call this
   # function then the action won't be counted in the stats.
   def notify_action_performed(self, action_type):
-    print "asdfasdfasdfasdf"
-    print action_type
-    print NUM_ACTION_TYPES
-    print self._action_occurence_counter
     self._action_occurence_counter[action_type] += 1
     self._total_action_count += 1
 
