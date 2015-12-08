@@ -32,7 +32,8 @@ class MockPR2:
       # Put the function to sleep for a moment
       rate.sleep()
 
-  # This function generates a data_time_tick with random data and returns it
+  # This function generates a data_time_tick with (essentially) random data
+  # that is periodic. The periodicity is set to 5 seconds currently.
   def create_data_time_tick(self):
     # Get the current time
     t_now = rospy.get_rostime().to_nsec()
@@ -43,18 +44,21 @@ class MockPR2:
     # add to the map the time it was created
     data_time_tick['t_send'] = t_now
 
+    # convert nanoseconds to seconds
+    t_now = t_now / 1e9
+
     # generate the x, y, and z position information using sin, cos, and tan
-    data_time_tick['x'] = 10*math.sin(t_now)
-    data_time_tick['y'] = 10*math.cos(t_now)
-    data_time_tick['z'] = 10*math.tan(t_now)
+    data_time_tick['x'] = 10*math.sin(t_now*2*math.pi/5))
+    data_time_tick['y'] = 10*math.cos(t_now*2*math.pi/5)
+    data_time_tick['z'] = 10*math.tan(t_now*2*math.pi/5)
 
     # generate the force, fluid pressure, microvibration, temperature, and thermal flux
     # information using sin, cos, and tan
-    data_time_tick['force'] = 10*math.sin(t_now)
-    data_time_tick['fluid_pressure'] = 10*math.cos(t_now)
-    data_time_tick['microvibration'] = 10*math.tan(t_now)
-    data_time_tick['temperature'] = 10*math.sin(t_now)
-    data_time_tick['thermal_flux'] = 10*math.cos(t_now)
+    data_time_tick['force'] = 10*math.sin(t_now*2*math.pi/5)
+    data_time_tick['fluid_pressure'] = 10*math.cos(t_now*2*math.pi/5)
+    data_time_tick['microvibration'] = 10*math.tan(t_now*2*math.pi/5)
+    data_time_tick['temperature'] = 10*math.sin(t_now*2*math.pi/5)
+    data_time_tick['thermal_flux'] = 10*math.cos(t_now*2*math.pi/5)
     
     # return the map of data
     return data_time_tick
