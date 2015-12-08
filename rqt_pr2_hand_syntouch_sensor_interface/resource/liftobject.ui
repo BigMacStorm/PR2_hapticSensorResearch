@@ -52,7 +52,7 @@
     <string>Use: </string>
    </property>
   </widget>
-  <widget class="QComboBox" name="lift_comboBox">
+  <widget class="QComboBox" name="ComboBox">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -129,7 +129,7 @@
     <string>Y:</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="lift_xCoord">
+  <widget class="QPlainTextEdit" name="XTextBox">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -138,11 +138,14 @@
      <height>21</height>
     </rect>
    </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
    <property name="plainText">
     <string>0.0</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="lift_yCoord">
+  <widget class="QPlainTextEdit" name="YTextBox">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -151,11 +154,14 @@
      <height>21</height>
     </rect>
    </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
    <property name="plainText">
     <string>0.0</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="lift_zCoord">
+  <widget class="QPlainTextEdit" name="ZTextBox">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -164,11 +170,14 @@
      <height>21</height>
     </rect>
    </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarAlwaysOff</enum>
+   </property>
    <property name="plainText">
     <string>0.0</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="lift_lift">
+  <widget class="QPushButton" name="LiftButton">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -181,7 +190,7 @@
     <string>Lift</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="lift_textBox">
+  <widget class="QPlainTextEdit" name="OutputTextBox">
    <property name="geometry">
     <rect>
      <x>210</x>
