@@ -56,7 +56,8 @@ class IndexWindowManager(WindowManager):
     self._widget.LifetimeStatisticsButton.clicked.connect(
         self._handle_lifetime_statistics_button_clicked)
 
-    # Create a thread that will listen for messages from the PR2.
+    # Create a thread that will listen for messages from the PR2 and
+    # update the labels on the window with accurate information.
     self._worker = threading.Thread(target=self.update_labels)
     self._worker.start()
 

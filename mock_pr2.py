@@ -10,10 +10,11 @@ class MockPR2:
 
   # This function initializes the Mock PR2 which will genereate fake data similar to 
   # the actualy data that would be transmitted by the PR2  
-  def __init__(self):
+  def __init__(self, period):
     # Initialize a ros publisher and initialize a new ros node
     self._pub = rospy.Publisher('PR2_data', String, queue_size=10)
     self._counter = 0
+    self._period = period
     rospy.init_node('PR2', anonymous=True)
 
   # This is the function that will run through a loop to generate "PR2" data to be
@@ -47,7 +48,7 @@ class MockPR2:
       return 3
 
   # This function generates a data_time_tick with (essentially) random data
-  # that is periodic. The periodicity is set to 5 seconds currently.
+  # that is periodic. The periodicity can be set using self._period
   def create_data_time_tick(self):
     # Get the current time
     t_now = rospy.get_rostime().to_nsec()
@@ -62,17 +63,17 @@ class MockPR2:
     t_now = t_now / 1e9
 
     # generate the x, y, and z position information using sin, cos, and tan
-    data_time_tick['x'] = 10*math.sin(t_now*2*math.pi/5)
-    data_time_tick['y'] = 10*math.cos(t_now*2*math.pi/5)
-    data_time_tick['z'] = 10*math.tan(t_now*2*math.pi/5)
+    data_time_tick['x'] = 10*math.sin(t_now*2*math.pi/self._period)
+    data_time_tick['y'] = 10*math.cos(t_now*2*math.pi/self._period)
+    data_time_tick['z'] = 10*math.tan(t_now*2*math.pi/self._period)
 
     # generate the force, fluid pressure, microvibration, temperature, and thermal flux
     # information using sin, cos, and tan
     data_time_tick['force'] = self.get_pulse_tick()
-    data_time_tick['fluid_pressure'] = 10*math.cos(t_now*2*math.pi/5)
-    data_time_tick['microvibration'] = 10*math.tan(t_now*2*math.pi/5)
-    data_time_tick['temperature'] = 10*math.sin(t_now*2*math.pi/5)
-    data_time_tick['thermal_flux'] = 10*math.cos(t_now*2*math.pi/5)
+    data_time_tick['fluid_pressure'] = 10*math.cos(t_now*2*math.pi/self._period)
+    data_time_tick['microvibration'] = 10*math.tan(t_now*2*math.pi/self._period)
+    data_time_tick['temperature'] = 10*math.sin(t_now*2*math.pi/self._period)
+    data_time_tick['thermal_flux'] = 10*math.cos(t_now*2*math.pi/self._period)
 
     self._counter += 1
     
@@ -82,7 +83,9 @@ class MockPR2:
 # if in main, create the mock_pr2 and run it
 if __name__ == '__main__':
     try:
-      mock_pr2 = MockPR2()
+      print 'Input the desired period of the data (in seconds): '
+      period = float(raw_input())
+      mock_pr2 = MockPR2(period)
       mock_pr2.run()
     except rospy.ROSInterruptException:
       pass
