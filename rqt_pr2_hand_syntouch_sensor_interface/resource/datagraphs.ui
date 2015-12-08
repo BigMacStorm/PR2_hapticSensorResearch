@@ -128,6 +128,16 @@
     </rect>
    </property>
   </widget>
+  <widget class="QWidget" name="canvas" native="true">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>190</y>
+     <width>120</width>
+     <height>80</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

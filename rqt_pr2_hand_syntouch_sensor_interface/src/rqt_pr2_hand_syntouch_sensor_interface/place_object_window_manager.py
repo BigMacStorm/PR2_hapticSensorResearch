@@ -19,7 +19,7 @@ class PlaceObjectWindowManager(WindowManager):
     ui_file = os.path.join(
         rospkg.RosPack().get_path(
             'rqt_pr2_hand_syntouch_sensor_interface'), 'resource', 
-            'palceobject.ui')
+            'placeobject.ui')
 
     # Extend the widget with all attributes and children from UI file
     loadUi(ui_file, self._widget)
