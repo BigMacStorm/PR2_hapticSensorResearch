@@ -30,7 +30,7 @@ class RobotWindowManager(WindowManager):
     self._widget.setObjectName('RobotVisualizerWindow')
 
     self._widget.setWindowTitle(
-        'Robot Visualizer')
+        'Robot Visualizer') 
 
     # Add widget to the user interface
     user_interface = pr2_interface.get_user_interface()
