@@ -50,7 +50,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QGraphicsView" name="dg_yPos"/>
+    <widget class="QWidget" name="xMPL" native="true">
+     <layout class="QHBoxLayout" name="xMPLlayout"/>
+    </widget>
    </item>
    <item>
     <widget class="QLabel" name="label_4">
@@ -60,7 +62,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QGraphicsView" name="dg_xPos"/>
+    <widget class="QWidget" name="yMPL" native="true">
+     <layout class="QHBoxLayout" name="yMPLlayout"/>
+    </widget>
    </item>
    <item>
     <widget class="QLabel" name="label_5">
@@ -70,11 +74,8 @@
     </widget>
    </item>
    <item>
-    <widget class="QGraphicsView" name="dg_zPos"/>
-   </item>
-   <item>
-    <widget class="QWidget" name="mplwindow" native="true">
-     <layout class="QVBoxLayout" name="mplvl"/>
+    <widget class="QWidget" name="zMPL" native="true">
+     <layout class="QHBoxLayout" name="zMPLlayout"/>
     </widget>
    </item>
   </layout>
