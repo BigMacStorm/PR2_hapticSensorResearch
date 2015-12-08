@@ -7,6 +7,8 @@ from python_qt_binding.QtGui import QWidget
 
 from .window_manager import WindowManager
 
+from .mpl_dyanamic import MyMplCanvas, MyDynamicMplCanvas
+
 # class that manages the pulse analysis window and ui
 class PulseAnalysisWindowManager(WindowManager):
 
@@ -31,6 +33,11 @@ class PulseAnalysisWindowManager(WindowManager):
     self._widget.setObjectName('PulseAnalysis')
 
     self._widget.setWindowTitle('Pulse Analyzer')
+
+    dc1 = MyDynamicMplCanvas()
+    dc1.set_pr2_interface(self._pr2_interface)
+    dc1.set_type('x')
+    self._widget.pulse_layout.addWidget(dc1)
 
     # Add widget to the user interface
     user_interface = pr2_interface.get_user_interface()
