@@ -59,22 +59,32 @@ class MyDynamicMplCanvas(MyMplCanvas):
       print "update x graph"
       temp = self.pr2_interface.get_data_range(-5)
       x_range = []
-      y_range = []
+      t_range = []
+      current_time = temp[-1].get_t_recv()
       for x in temp:
         x_range.append(x.get_x())
-        y_range.append(x.get_t_recv())
-      for i in range(len(x_range)):
-          print '%s %s' % (str(x_range[i]), str(y_range[i]))
-      self.axes.plot(y_range, x_range, 'r')
+        t_range.append(x.get_t_recv() - current_time)
+      self.axes.plot(t_range, x_range, 'r')
       self.draw()
     elif self.type == 'y':
-      print "updating y graph"
+      print "update y graph"
+      temp = self.pr2_interface.get_data_range(-5)
+      y_range = []
+      t_range = []
+      current_time = temp[-1].get_t_recv()
+      for x in temp:
+        y_range.append(x.get_y())
+        t_range.append(x.get_t_recv() - current_time)
+      self.axes.plot(t_range, y_range, 'r')
+      self.draw()
     elif self.type == 'z':
-      print "updating z graph"
-
-    """
-    # Build a list of 4 random integers between 0 and 10 (both inclusive)
-    l = [random.randint(0, 10) for i in range(4)]
-
-    self.axes.plot([0, 1, 2, 3], l, 'r')
-    self.draw()"""
+      print "update z graph"
+      temp = self.pr2_interface.get_data_range(-5)
+      z_range = []
+      t_range = []
+      current_time = temp[-1].get_t_recv()
+      for x in temp:
+        z_range.append(x.get_z())
+        t_range.append(x.get_t_recv() - current_time)
+      self.axes.plot(t_range, z_range, 'r')
+      self.draw()
