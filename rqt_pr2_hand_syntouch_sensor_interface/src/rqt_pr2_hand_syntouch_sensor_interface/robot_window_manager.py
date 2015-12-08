@@ -7,7 +7,7 @@ from python_qt_binding.QtGui import QWidget
 
 from .window_manager import WindowManager
 
-# class that handles the the robot visualizer window and ui
+# class that handles the robot visualizer window and ui
 class RobotWindowManager(WindowManager):
 
   # Initialize the WindowManager base class. The WindowManager class
