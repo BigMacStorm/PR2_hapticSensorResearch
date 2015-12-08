@@ -141,9 +141,6 @@
    <property name="plainText">
     <string>0.0</string>
    </property>
-   <property name="placeholderText">
-    <string>N/A</string>
-   </property>
   </widget>
   <widget class="QPlainTextEdit" name="lift_yCoord">
    <property name="geometry">
@@ -157,9 +154,6 @@
    <property name="plainText">
     <string>0.0</string>
    </property>
-   <property name="placeholderText">
-    <string>N/A</string>
-   </property>
   </widget>
   <widget class="QPlainTextEdit" name="lift_zCoord">
    <property name="geometry">
@@ -172,9 +166,6 @@
    </property>
    <property name="plainText">
     <string>0.0</string>
-   </property>
-   <property name="placeholderText">
-    <string>N/A</string>
    </property>
   </widget>
   <widget class="QPushButton" name="lift_lift">
@@ -200,11 +191,7 @@
     </rect>
    </property>
    <property name="plainText">
-    <string>Execution State:
-Not Running
-Left hand empty
-Object in Reach
-</string>
+    <string/>
    </property>
   </widget>
  </widget>

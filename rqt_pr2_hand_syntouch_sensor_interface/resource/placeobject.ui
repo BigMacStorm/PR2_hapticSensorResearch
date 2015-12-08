@@ -38,9 +38,6 @@
    <property name="plainText">
     <string>0.0</string>
    </property>
-   <property name="placeholderText">
-    <string>N/A</string>
-   </property>
   </widget>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
@@ -66,9 +63,6 @@
    </property>
    <property name="plainText">
     <string>0.0</string>
-   </property>
-   <property name="placeholderText">
-    <string>N/A</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">
@@ -108,9 +102,6 @@
    </property>
    <property name="plainText">
     <string>0.0</string>
-   </property>
-   <property name="placeholderText">
-    <string>N/A</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_5">
@@ -200,11 +191,7 @@
     </rect>
    </property>
    <property name="plainText">
-    <string>Execution State:
-Not Running
-Left hand empty
-Object in Reach
-</string>
+    <string/>
    </property>
   </widget>
  </widget>
