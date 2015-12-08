@@ -75,7 +75,7 @@ class IndexWindowManager(WindowManager):
     self._pr2_interface.open_window(WindowTypes.LifetimeStatsWindow)
 
   def update_labels(self):
-    rate = rospy.Rate(5) # 10hz
+    rate = rospy.Rate(5) # 5hz
     last_data_point = None
     while not rospy.is_shutdown() and not self._destroyed:
       current_data_point = self._pr2_interface.get_most_recent_data()

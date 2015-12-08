@@ -54,6 +54,9 @@ class PR2Interface(Plugin):
     def get_most_recent_data(self):
       return self._sensor_manager.get_data()
 
+    def get_data_range(self, t0, t1=None):
+      return self._sensor_manager.get_data_range(t0, t1)
+
     def shutdown_plugin(self):
       self._window_creation_manager.shutdown_all_windows()
 

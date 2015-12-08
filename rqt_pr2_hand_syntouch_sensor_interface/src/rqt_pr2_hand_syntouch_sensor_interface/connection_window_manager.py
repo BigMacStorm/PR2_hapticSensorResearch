@@ -1,6 +1,8 @@
 import os
 import rospy
 import rospkg
+import sys
+import threading
 
 from python_qt_binding import loadUi
 from python_qt_binding.QtGui import QWidget
@@ -32,6 +34,62 @@ class ConnectionWindowManager(WindowManager):
     # Add widget to the user interface
     user_interface = pr2_interface.get_user_interface()
     user_interface.add_widget(self._widget)
+
+    # Since this window has text that needs to be updated in real time
+    # A thread will need to be created that will handle updating the 
+    # labels.
+    self._worker = threading.Thread(target=self.update_labels)
+    self._worker.start()
+
+  def update_labels(self):
+    rate = rospy.Rate(5) # 5hz
+    last_data_point = None
+    while not rospy.is_shutdown() and not self._destroyed:
+      current_data_point = self._pr2_interface.get_most_recent_data()
+      if last_data_point == current_data_point or not last_data_point:
+        self.set_label_text_disconnected()
+      else:
+        self.set_label_text_connected()
+
+      rate.sleep()
+      last_data_point = current_data_point
+
+  def set_label_text_disconnected(self):
+    self._widget.PR2StatusLabel.setText("PR2 Status: Disconnected")
+    self._widget.SyntouchStatusLabel.setText(
+        "Syntouch (fingers) Status: Disconnected")
+    self._widget.CurrentStateLabel.setText('Current state: -1 (Disconnected)')
+    self._widget.UploadRateLabel.setText('Upload rate: 0 bytes/s')
+    self._widget.DownloadRateLabel.setText('Download rate: 0 bytes/s')
+    self._widget.LatencyLabel.setText('Latency: N/a ms')
+
+  def set_label_text_connected(self):
+    self._widget.PR2StatusLabel.setText("PR2 Status: Connected")
+    self._widget.SyntouchStatusLabel.setText(
+        "Syntouch (fingers) Status: Connected")
+    self._widget.CurrentStateLabel.setText('Current state: 0 (Idle)')
+
+    upload_rate = 0
+    self._widget.UploadRateLabel.setText('Upload rate: %d bytes/s' % upload_rate)
+
+    # Retrieve data from the sensor manager to be able to calculate the
+    # upload rate, download rate, and latency.
+
+    # Retrieve an array of data time ticks for the last second.
+    data_time_ticks = self._pr2_interface.get_data_range(-1)
+    
+    # Get the size (in bytes).
+    download_rate = sys.getsizeof(data_time_ticks)
+
+    self._widget.DownloadRateLabel.setText('Download rate: %s bytes/s' 
+        % str(download_rate))
+    
+    most_recent_tick = data_time_ticks[-1]
+    latency = (most_recent_tick.get_t_recv() - most_recent_tick.get_t_recv())
+    
+    # divide by 1e6 to convert from nanoseconds to milliseconds
+    self._widget.LatencyLabel.setText('Latency: %s ns (%s ms)' 
+        % (str(latency), str(latency/1e6)))
 
   def reopen(self):
     user_interface = self._pr2_interface.get_user_interface()
