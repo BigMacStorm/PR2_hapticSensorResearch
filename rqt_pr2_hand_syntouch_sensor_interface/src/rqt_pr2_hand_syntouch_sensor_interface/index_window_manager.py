@@ -80,7 +80,6 @@ class IndexWindowManager(WindowManager):
     while not rospy.is_shutdown() and not self._destroyed:
       current_data_point = self._pr2_interface.get_most_recent_data()
       if last_data_point == current_data_point or not last_data_point:
-        self._disconnected = True
         self._widget.label.setText("PR2 Status: Disconnected")
         self._widget.label_2.setText("Syntouch (fingers) Status: Disconnected")
       else:

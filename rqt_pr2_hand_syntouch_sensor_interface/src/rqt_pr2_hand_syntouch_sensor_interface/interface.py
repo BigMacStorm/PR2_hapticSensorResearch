@@ -31,6 +31,7 @@ class PR2Interface(Plugin):
     # Initialize the window manager and open the Index window for the user.
     self._window_creation_manager = WindowCreationManager(self)
     self.open_window(WindowTypes.IndexWindow)
+    self.open_window(WindowTypes.LifetimeStatsWindow)
 
   def parse_arguments(self, context):
     # Process standalone plugin command-line arguments
@@ -56,6 +57,9 @@ class PR2Interface(Plugin):
 
   def get_data_range(self, t0, t1=None):
     return self._sensor_manager.get_data_range(t0, t1)
+
+  def count_data_time_ticks(self):
+    return self._sensor_manager.count_data_time_ticks()
 
   def shutdown_plugin(self):
     self._window_creation_manager.shutdown_all_windows()

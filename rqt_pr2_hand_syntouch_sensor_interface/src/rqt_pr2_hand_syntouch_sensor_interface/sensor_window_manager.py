@@ -26,8 +26,7 @@ class SensorWindowManager(WindowManager):
     # Give QObjects reasonable names
     self._widget.setObjectName('SensorVisualizerWindow')
 
-    self._widget.setWindowTitle(
-        'Sensor Visualizer')
+    self._widget.setWindowTitle('Sensor Visualizer')
 
     # Add widget to the user interface
     user_interface = pr2_interface.get_user_interface()
