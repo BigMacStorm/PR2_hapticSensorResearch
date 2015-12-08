@@ -82,14 +82,13 @@ class PR2Interface(Plugin):
   def get_data_range(self, t0, t1=None):
     return self._sensor_manager.get_data_range(t0, t1)
 
-<<<<<<< HEAD
-  # This function will shutdown the window creation manager as well as all of the
-  # windows currently open
-=======
+  # This function will return the number of data time ticks that have occurred
+  # throughout the lifetime of the pr2 interface.
   def count_data_time_ticks(self):
     return self._sensor_manager.count_data_time_ticks()
 
->>>>>>> 966b252e227aeb91e27510b07239fc7d5582ab19
+  # This function will shutdown the window creation manager as well as all of the
+  # windows currently open
   def shutdown_plugin(self):
     self._window_creation_manager.shutdown_all_windows()
 
