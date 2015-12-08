@@ -5,6 +5,7 @@ import rospkg
 from python_qt_binding import loadUi
 from python_qt_binding.QtGui import QWidget
 
+from .action_types import ActionTypes
 from .window_manager import WindowManager
 
 # Class that handles the lift object window and ui
@@ -59,6 +60,7 @@ class LiftObjectWindowManager(WindowManager):
 
     # TODO: Add code to call the PR2_Controller to move the hand, control the
     # hand to lift the object, etc.
+    self._pr2_interface.notify_action_performed(ActionTypes.LiftObject)
 
   # calls the function to readd the widgets if the window was closed
   def reopen(self):

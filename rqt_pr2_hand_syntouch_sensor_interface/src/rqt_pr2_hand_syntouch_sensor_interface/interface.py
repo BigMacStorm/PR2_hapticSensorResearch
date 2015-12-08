@@ -88,9 +88,18 @@ class PR2Interface(Plugin):
     return self._sensor_manager.count_data_time_ticks()
 
   # This function will shutdown the window creation manager as well as all of the
-  # windows currently open
+  # windows currently open.
   def shutdown_plugin(self):
     self._window_creation_manager.shutdown_all_windows()
+
+  # This function will notify the lifetime stats manager of an action having
+  # been completed.
+  # Args:
+  #    action_type: The ActionType object representing the action completed.
+  def notify_action_performed(self, action_type):
+    open_windows = self._window_creation_manager._open_windows
+    LifetimeStatsWindow = (open_windows[WindowTypes.LifetimeStatsWindow])
+    LifetimeStatsWindow.notify_action_performed(action_type)
 
   # This function will save settings that the user has chosen
   # Args:

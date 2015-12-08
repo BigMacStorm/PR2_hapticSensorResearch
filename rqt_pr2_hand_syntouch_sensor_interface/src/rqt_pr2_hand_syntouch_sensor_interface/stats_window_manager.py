@@ -6,6 +6,9 @@ import threading
 from python_qt_binding import loadUi
 from python_qt_binding.QtGui import QWidget
 
+from .action_types import ActionTypes
+from .action_types import NUM_ACTION_TYPES
+
 from .window_manager import WindowManager
 
 class LifetimeStatsWindowManager(WindowManager):
@@ -22,6 +25,10 @@ class LifetimeStatsWindowManager(WindowManager):
     # Initialize variables necessary for keeping track of time stats.
     self._startup_time = rospy.get_rostime().to_nsec()
     self._disconnected = True
+
+    # Initialize action stats
+    self._action_occurence_counter = [0 in xrange(NUM_ACTION_TYPES)]
+    self._total_action_count = 0
 
     # Get path to UI file which should be in the "resource" folder of this package
     ui_file = os.path.join(
@@ -48,7 +55,7 @@ class LifetimeStatsWindowManager(WindowManager):
     self._worker = threading.Thread(target=self.track_lifetime_stats)
     self._worker.start()
 
-  # This function will be called be a thread to keep track of the lifetime statistics
+  # This function will be alled be a thread to keep track of the lifetime statistics
   # of the PR2. This function will also update the lifetime statistics window
   def track_lifetime_stats(self):
     # Initialize local variables.
@@ -114,20 +121,41 @@ class LifetimeStatsWindowManager(WindowManager):
 
     self._widget.AverageSampleRateLabel.setText('%d hz' % data_samples_per_sec)
 
+  # This function is called to notify the stats manager that an action has been
+  # been performed. If the window performing the action forgets to call this
+  # function then the action won't be counted in the stats.
+  def notify_action_performed(self, action_type):
+    self._action_occurence_counter[action_type] += 1
+    self._total_action_count += 1
+
   # This function is used to update the actions performed label specifically because
   # it has to add up the total number of actions performed by the PR2
-  # NOTE: This is not implemented right now because the PR2 is not currently connected 
-  #       to our interface
   def update_actions_performed_label(self):
-    pass
+    self._widget.ActionsPerformedLabel.setText('%d' % self._total_action_count)
 
   # This function is used to update the most performed action label specifically because
-  # it has to calculate which action was performed the most
-  # NOTE: This is not implemented right now because the PR2 is not currently connected
-  #       to our interface
+  # it has to calculate which action was performed the most.
   def update_most_performed_action_label(self):
-    pass
+    most_performed_action = None
+    most_performed_action_count = 0
+    for i in range(len(self._action_occurence_counter)):
+      if self._action_occurence_counter[i] > most_performed_action_count:
+        most_performed_action = i
+        most_performed_action_count = self._action_occurence_counter[i]
 
+    if most_performed_action == ActionTypes.LiftObject:
+      action_string = 'LiftObject'
+    elif most_performed_action == ActionTypes.PlaceObject:
+      action_string = 'PlaceObject'
+    elif most_performed_action == ActionTypes.RotateObject:
+      action_string = 'RotateObject'
+    elif most_performed_action == ActionTypes.SwitchHands:
+      action_string = 'SwitchHands'
+    else:
+      action_string = 'None'
+
+    self._widget.MostPerformedActionLabel.setText(action_string)
+     
   # This function is used to update the interface uptime label specifically because it
   # has to calculate the total amount of time that the interface has ran over its lifetime.
   def update_pr2_interface_uptime_label(self):
