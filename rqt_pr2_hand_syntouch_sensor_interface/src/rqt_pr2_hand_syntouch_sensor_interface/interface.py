@@ -6,6 +6,7 @@ from qt_gui.plugin import Plugin
 from python_qt_binding import loadUi
 from python_qt_binding.QtGui import QWidget
 
+from .sensor_manager import SensorManager
 from .window_creation_manager import WindowCreationManager
 from .window_types import WindowTypes
 
@@ -22,6 +23,10 @@ class PR2Interface(Plugin):
 
         # Give QObjects reasonable names
         self.setObjectName('PR2Interface')
+
+        # Create a sensor manager object that will begin listening to data
+        # coming from the PR2 and the BioTac sensors.
+        self._sensor_manager = SensorManager(self)
 
         # Initialize the window manager and open the Index window for the user.
         self._window_creation_manager = WindowCreationManager(self)
@@ -45,7 +50,9 @@ class PR2Interface(Plugin):
 
     def open_window(self, window_type):
       self._window_creation_manager.new_window_manager(window_type)
-      
+
+    def get_most_recent_data(self):
+      return self._sensor_manager.get_data()
 
     def shutdown_plugin(self):
         # TODO unregister all publishers here

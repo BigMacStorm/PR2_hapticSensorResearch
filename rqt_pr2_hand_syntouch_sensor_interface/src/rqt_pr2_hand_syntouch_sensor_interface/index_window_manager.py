@@ -1,6 +1,7 @@
 import os
 import rospy
 import rospkg
+import threading
 
 from python_qt_binding import loadUi
 from python_qt_binding.QtGui import QWidget
@@ -52,6 +53,10 @@ class IndexWindowManager:
     self._widget.LifetimeStatisticsButton.clicked.connect(
         self._handle_lifetime_statistics_button_clicked)
 
+    self._worker = threading.Thread(target=self.update_labels)
+    self._worker.daemon = True
+    self._worker.start()
+
   def _handle_connection_info_button_clicked(self):
     self._pr2_interface.open_window(WindowTypes.ConnectionWindow)
 
@@ -69,6 +74,21 @@ class IndexWindowManager:
 
   def _handle_lifetime_statistics_button_clicked(self):
     self._pr2_interface.open_window(WindowTypes.LifetimeStatsWindow)
+
+  def update_labels(self):
+    rate = rospy.Rate(5) # 10hz
+    last_data_point = None
+    while not rospy.is_shutdown():
+      current_data_point = self._pr2_interface.get_most_recent_data()
+      if last_data_point == current_data_point or not last_data_point:
+        self._disconnected = True
+        self._widget.label.setText("PR2 Status: Disconnected")
+        self._widget.label_2.setText("Syntouch (fingers) Status: Disconnected")
+      else:
+        self._widget.label.setText("PR2 Status: Connected")
+        self._widget.label_2.setText("Syntouch (fingers) Status: Connected")
+      rate.sleep()
+      last_data_point = current_data_point
 
   def reopen(self):
     user_interface = self._pr2_interface.get_user_interface()
