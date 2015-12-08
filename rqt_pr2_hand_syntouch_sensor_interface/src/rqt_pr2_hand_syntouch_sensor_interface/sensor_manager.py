@@ -3,6 +3,7 @@ from std_msgs.msg import String
 
 from .data_time_tick import DataTimeTick
 
+# Main class to manage data for the sensor visualizer
 class SensorManager:
   
   # Initializes the SensorManager class. The SensorManager class
