@@ -8,7 +8,7 @@ from python_qt_binding.QtGui import QWidget
 from .window_manager import WindowManager
 from .window_types import WindowTypes
 
-# Class that handles the run programs window and ui
+# Class that handles the run programs window and ui.
 class RunProgramsWindowManager(WindowManager):
 
   # Initialize the WindowManager base class. The WindowManager class

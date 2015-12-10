@@ -9,9 +9,10 @@ from python_qt_binding.QtGui import QWidget
 from .window_types import WindowTypes
 from .window_manager import WindowManager
 
+# Class that handles the index window and ui.
 class IndexWindowManager(WindowManager):
 
-  # This function will initialize the window and all widgets attached to this window.
+  # This function will initialize the window and all widgets attached to the Index window.
   # Args:
   #	pr2_interface: the single pr2 interface plug in object
   def __init__(self, pr2_interface):
@@ -92,8 +93,9 @@ class IndexWindowManager(WindowManager):
   def _handle_lifetime_statistics_button_clicked(self):
     self._pr2_interface.open_window(WindowTypes.LifetimeStatsWindow)
 
-  # This function will check to see if the pr2 is connected and if it is the window
-  # will update the connection status information.
+  # This function will loop until the destruction of the index window, updating
+  # the connected/disconnected status labels in real time. Meant to be performed
+  # in its own thread.
   def update_labels(self):
     # Initialize local variables.
     rate = rospy.Rate(5) # 5hz

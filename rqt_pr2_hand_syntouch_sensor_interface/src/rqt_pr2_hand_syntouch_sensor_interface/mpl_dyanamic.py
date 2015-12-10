@@ -77,6 +77,7 @@ class MyDynamicMplCanvas(MyMplCanvas):
     self.pr2_interface = sent_pr2_interface
     self.timer.start(1000)
 
+  # This function is used to update a graph with data from the last 5 seconds.
   def update_figure(self):
     temp = self.pr2_interface.get_data_range(-5)
     p_range = []
@@ -88,25 +89,25 @@ class MyDynamicMplCanvas(MyMplCanvas):
       return
     current_time = temp[-1].get_t_recv()
     if self.type == 'x':
-      print "update x graph"
+      # update x graph.
       for x in temp:
         x_range.append(x.get_x())
         t_range.append(x.get_t_recv() - current_time)
       self.axes.plot(t_range, x_range, 'r')
     elif self.type == 'y':
-      print "update y graph"
+      # update y graph.
       for x in temp:
         y_range.append(x.get_y())
         t_range.append(x.get_t_recv() - current_time)
       self.axes.plot(t_range, y_range, 'r')
     elif self.type == 'z':
-      print "update z graph"
+      # update z graph.
       for x in temp:
         z_range.append(x.get_z())
         t_range.append(x.get_t_recv() - current_time)
       self.axes.plot(t_range, z_range, 'r')
     elif self.type == 'p':
-      print "update p graph"
+      # update pulse graph.
       for x in temp:
         p_range.append(x.get_force())
         t_range.append(x.get_t_recv() - current_time)

@@ -8,8 +8,12 @@ from std_msgs.msg import String
 
 class MockPR2:
 
-  # This function initializes the Mock PR2 which will genereate fake data similar to 
-  # the actualy data that would be transmitted by the PR2  
+  # This function initializes the Mock PR2 ROS Node, causing it
+  # to publish data in a similar manner to the PR2 would. After initialization
+  # sin/cos/tan data is published to the ros topic 'PR2_data' at 10 hz.
+  # Args:
+  #   period: The period of the trigonmetric function data published, 
+  #           in seconds.
   def __init__(self, period):
     # Initialize a ros publisher and initialize a new ros node
     self._pub = rospy.Publisher('PR2_data', String, queue_size=10)
@@ -80,7 +84,6 @@ class MockPR2:
     # return the map of data
     return data_time_tick
 
-# if in main, create the mock_pr2 and run it
 if __name__ == '__main__':
     try:
       print 'Input the desired period of the data (in seconds): '

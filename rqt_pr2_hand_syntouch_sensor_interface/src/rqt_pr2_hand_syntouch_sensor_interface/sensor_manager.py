@@ -3,33 +3,37 @@ from std_msgs.msg import String
 
 from .data_time_tick import DataTimeTick
 
-# Main class to manage data for the sensor visualizer
+# Class to handle the ROS Node, manage sensor data retrieval from the PR2,
+# store retrieved data, and provide methods for accessing data.
 class SensorManager:
   
   # Initializes the SensorManager class. The SensorManager class
   # creates a list for sensor data to be placed in and sets up
-  # a subscriber to take in and handle new data
+  # a subscriber to take in and handle new data.
   # Args:
-  # 	pr2_interface: the single pr2 interface plug in object
+  # 	pr2_interface: The single pr2 interface plug in object.
   def __init__(self, pr2_interface):
     self._pr2_interface = pr2_interface
     self._data = []
+
+    # Register the callback for receiving data.
     rospy.Subscriber("PR2_data", String, self.receive_data)
 
-  # Logs that data has been recieved and calls update_data
-  # to handle the revieved data
+  # A callback to be called when data is recieved from the PR2.
   # Args:
-  #	data: new data being recived by sensors
+  #	  data: A std_msgs.msgs.String object holding data retrived from the
+  #         PR2 robot. This data is a dictionary string (in json format).
   def receive_data(self, data):
     rospy.loginfo("Received data from node with caller id " + 
                    rospy.get_caller_id())
     self.update_data(data)
 
-  # Save data here for possibly writing to file in the future.
-  # creates a new data_time_tick for the new data
-  # and adds it to the data list
+  # Store data in memory for fast retrieval by appending the data to the 
+  # end of the data list. Since data is always retrieved in-order, this
+  # list of DataTimeTicks sorted by data retrieval time.
   # Args:
-  #	data: new data being recived by sensors
+  #	  data: A std_msgs.msgs.String object holding data retrived from the
+  #         PR2 robot. This data is a dictionary string (in json format).
   def update_data(self, data):
     data_time_tick = DataTimeTick(data.data, rospy.get_rostime().to_nsec())
     self._data.append(data_time_tick)
@@ -42,22 +46,33 @@ class SensorManager:
     else:
       return None
     
-  # This function will return a range of data time ticks. t0 and 
-  # t1 are times (in seconds) relative to the current time that
-  # data is requested for (e.g. they should be negative).
+  # This function returns a sorted list of DataTimeTick objects representing
+  # sensor data from an interval of time.
+  #
+  # Example: get_data_range(-5, -3) will return all sensor data retrieved from 5
+  #          seconds ago to 3 seconds ago.
   # Args:
-  #	   t0: start of requested time 
-  #    t1: end of requested time
-  def get_data_range(self, t0, t1=None):
-    # Handle the case where there is no data yet.
+  # 	t0: The start time offest of the requested time interval, in seconds.
+  # 	t1: The end time offest of the requested time interval, in seconds.
+  def get_data_range(self, t0, t1=0):
+    # Handle the edge case where there is no data yet.
     if not self._data:
       return []
 
+    # Calculate t0 and t1 in absolute time.
     t0_time = rospy.get_rostime().to_nsec() + t0 * 1e9
+    t1_time = rospy.get_rostime().to_nsec() + t1 * 1e9
+
+    # Handle the edge case where there is no data in [t0_time,t1_time]
+    if (self._data[0].get_t_recv() > t1_time or
+        self._data[-1].get_t_recv() < t0_time):
+      return []
+
     left = 0
     right = len(self._data) - 1
 
-    # find t0 in the data list
+    # Find the first DataTimeTick in the data list after t0 by performing 
+    # a binary search.
     while(left < right):
       mid = (left + right) / 2
       if self._data[mid].get_t_recv() < t0_time:
@@ -65,28 +80,32 @@ class SensorManager:
       else:
         right = mid
 
-    assert 0 <= mid and mid < len(self._data)
     t0_index = mid
 
-    # if no t1 is passed take up to the most current data
+    # if no t1 is None, return all data retrieved since t0.
     if t1 is None:
       return self._data[t0_index:]
   
     t1_time = rospy.get_rostime().to_nsec() + t1 * 1e9
     left = 0
     right = len(self._data) - 1
-    # find t1 in the data list
+
+    # Find the last DataTimeTick in the data list before t1 by performing 
+    # a binary search.
     while(left < right):
       mid = (left + right) / 2
       if self._data[mid].get_t_recv() < t1_time:
         left = mid + 1
       else:
         right = mid
+    if self._data[mid].get_t_recv() > t1_time:
+      mid -= 1
 
-    assert 0 <= mid and mid < len(self._data)
     t1_index = mid
 
-    return self._data[t0_index:t1_index]
+    return self._data[t0_index:t1_index+1]
 
+  # This function returns the number of DataTimeTicks stored, for statistic
+  # purposes.
   def count_data_time_ticks(self):
     return len(self._data)

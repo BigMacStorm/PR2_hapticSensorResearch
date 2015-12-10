@@ -3,13 +3,15 @@ import abc
 from python_qt_binding import loadUi
 from python_qt_binding.QtGui import QWidget
 
-# The abstract base class that all of the other window managers inherit from 
+# The abstract base class that all of the other window managers inherit from,
+# providing the necessary methods that all WindowManagers need.
 class WindowManager:
   __metaclass__ = abc.ABCMeta
 
   # Initialize the WindowManager base class. The WindowManager class
-  # creates the _widget object that will be used by all windoww and
-  # guarantees successful shutdown of rqt upon program termination.
+  # creates the _widget object that will be used by all windows and
+  # further initializes variables that will be used by each derived
+  # WindowManager object.
   # Args:
   # 	pr2_interface: the single pr2 interface plug in object
   @abc.abstractmethod

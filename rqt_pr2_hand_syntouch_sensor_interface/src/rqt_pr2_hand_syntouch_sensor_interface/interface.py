@@ -10,17 +10,16 @@ from .sensor_manager import SensorManager
 from .window_creation_manager import WindowCreationManager
 from .window_types import WindowTypes
 
-
+# This is the overaching class and code entroy point for the PR2 interface. There
+# will only be one instance of this class for the PR2 Interface.
 class PR2Interface(Plugin):
 
-  # Initialize the PR2 interface class. The PR2Interface class sets the 
-  # context for the plugin as well as initializing the other managers
-  # needed by the interface and opening up the index window. The managers
-  # that this initializes includes the sensor manager and the window creation
-  # creation manager.
+  # Initialize the PR2 interface class/plugin.
   # Args:
-  # 	context: provides information to the plugin and exposes the methods
-  #	         to the underlying RQT framework and the plugin handler
+  # 	context: The qt_gui.plugin_context.PluginContext object for the
+  #            PR2 interface plugin, implementing the rqt api as described in
+  #            the API Overview linked below.
+  #            http://wiki.ros.org/rqt/Reviews/2012-06-20_API_Review
   def __init__(self, context):
     # Initialize the Plugin base class.
     super(PR2Interface, self).__init__(context)
@@ -40,11 +39,16 @@ class PR2Interface(Plugin):
     # Initialize the window manager and open the Index window for the user.
     self._window_creation_manager = WindowCreationManager(self)
     self.open_window(WindowTypes.IndexWindow)
+
+    # Initialize the LifetimeStatsWindowManager, as it is necessary that it
+    # is initialized in order to record statistics.
+    # TODO: Provide a way to do this without calling open_window, as it is
+    #       mislieading (the window isn't actually opened).
     self.open_window(WindowTypes.LifetimeStatsWindow)
 
-  # This function will process standalone plugin command-line arguments
+  # This function will process plugin command-line arguments.
   # Args:
-  # 	context: this function is passed the current context
+  # 	context: The PluginContext object representing the PR2 Interface.
   def parse_arguments(self, context):
     from argparse import ArgumentParser
     parser = ArgumentParser()
@@ -62,40 +66,43 @@ class PR2Interface(Plugin):
   def get_user_interface(self):
     return self._context
 
-  # This function will call the window creation manager to open a new window 
-  # of a given type
+  # This function will signal the window creation manager to open a new window 
+  # of a given type.
   # Args:
-  # 	window_type: This is the type of window that the window creation manager
-  #	             will open
+  # 	window_type: A WindowType indicating the type of window manager to open.
   def open_window(self, window_type):
     self._window_creation_manager.new_window_manager(window_type)
 
-  # This function will return the most recent data gathered from the sensor manager
+  # This function returns the most recent DataTimeTick object retrieved
+  # from the PR2.
   def get_most_recent_data(self):
     return self._sensor_manager.get_data()
 
-  # This function will return a sorted list of data time ticks between the offets
-  # of t0 and t1
+  # This function returns a sorted list of DataTimeTick objects representing an
+  # sensor data from an interval of time.
+  #
+  # Example: get_data_range(-5, -3) will return all sensor data retrieved from 5
+  #          seconds ago to 3 seconds ago.
   # Args:
-  # 	t0: the start time offest of the requested time period
-  # 	t1: the end time offset of the requested time period
-  def get_data_range(self, t0, t1=None):
+  # 	t0: The start time offest of the requested time interval, in seconds.
+  # 	t1: The end time offest of the requested time interval, in seconds.
+  def get_data_range(self, t0, t1=0):
     return self._sensor_manager.get_data_range(t0, t1)
 
-  # This function will return the number of data time ticks that have occurred
-  # throughout the lifetime of the pr2 interface.
+  # This function returns the count of DataTimeTicks that have been
+  # retrieved throughout the lifetime of the pr2 interface.
   def count_data_time_ticks(self):
     return self._sensor_manager.count_data_time_ticks()
 
-  # This function will shutdown the window creation manager as well as all of the
+  # This function shuts down the window creation manager as well as all of the
   # windows currently open.
   def shutdown_plugin(self):
     self._window_creation_manager.shutdown_all_windows()
 
-  # This function will notify the lifetime stats manager of an action having
+  # This function will notify the LifetimeStatsManager object of an action having
   # been completed.
   # Args:
-  #    action_type: The ActionType object representing the action completed.
+  #    action_type: The ActionType representing the action completed.
   def notify_action_performed(self, action_type):
     open_windows = self._window_creation_manager._open_windows
     LifetimeStatsWindow = (open_windows[WindowTypes.LifetimeStatsWindow])
@@ -105,7 +112,6 @@ class PR2Interface(Plugin):
   # Args:
   # 	plugin_settings: the current settings as they were before being changed
   # 	instance_settings: the settings that the user has currently changed
-  # NOTE: This function is not actually being implement yet
   def save_settings(self, plugin_settings, instance_settings):
     # TODO save intrinsic configuration, usually using:
     # instance_settings.set_value(k, v)
@@ -115,8 +121,6 @@ class PR2Interface(Plugin):
   # Args:
   # 	plugin_settings: the current settings as they were before being changed
   # 	instance_settings: the settings that the user has currently changed
-  # NOTE: This function is not actually being implement yet
-  # This function will process standalone plugin command-line arguments
   def restore_settings(self, plugin_settings, instance_settings):
     # TODO restore intrinsic configuration, usually using:
     # v = instance_settings.value(k)
