@@ -10,7 +10,7 @@ from .sensor_manager import SensorManager
 from .window_creation_manager import WindowCreationManager
 from .window_types import WindowTypes
 
-# This is the overaching class and code entroy point for the PR2 interface. There
+# This is the overaching class and code entry point for the PR2 interface. There
 # will only be one instance of this class for the PR2 Interface.
 class PR2Interface(Plugin):
 
