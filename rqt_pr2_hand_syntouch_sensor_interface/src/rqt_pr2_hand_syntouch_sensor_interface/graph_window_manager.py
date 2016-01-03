@@ -5,19 +5,9 @@ import threading
 
 from python_qt_binding import loadUi
 from python_qt_binding.QtGui import QWidget
-from PyQt4.uic import loadUiType
-import numpy as np
 from PyQt4 import QtGui
-import PyQt4.QtCore as qtc
-
-from .mpl_dyanamic import MyMplCanvas, MyDynamicMplCanvas
- 
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_qt4agg import (
-    FigureCanvasQTAgg as FigureCanvas,
-    NavigationToolbar2QT as NavigationToolbar)
-
-import random
+import PyQt4.QtCore as QtCore
+import pyqtgraph
 
 from .window_manager import WindowManager
 
@@ -46,24 +36,46 @@ class DataGraphsWindowManager(WindowManager):
 
     self._widget.setWindowTitle('Data Graphs')
 
-    dc1 = MyDynamicMplCanvas()
-    dc1.set_pr2_interface(self._pr2_interface)
-    dc1.set_type('x')
-    self._widget.xMPLlayout.addWidget(dc1)
+    self._x_plot = pyqtgraph.PlotWidget()
+    self._widget.xMPLlayout.addWidget(self._x_plot)
 
-    dc2 = MyDynamicMplCanvas()
-    dc2.set_pr2_interface(self._pr2_interface)
-    dc2.set_type('y')
-    self._widget.yMPLlayout.addWidget(dc2)
+    self._y_plot = pyqtgraph.PlotWidget()
+    self._widget.yMPLlayout.addWidget(self._y_plot)
 
-    dc3 = MyDynamicMplCanvas()
-    dc3.set_pr2_interface(self._pr2_interface)
-    dc3.set_type('z')
-    self._widget.zMPLlayout.addWidget(dc3)
+    self._z_plot = pyqtgraph.PlotWidget()
+    self._widget.zMPLlayout.addWidget(self._z_plot)
+
+    self._graph_timer = QtCore.QTimer()
+    self._graph_timer.timeout.connect(self.update_graphs)
+    self._graph_timer.start(33) # 60 frames per second.  
 
     # Add widget to the user interface
     user_interface = pr2_interface.get_user_interface()
     user_interface.add_widget(self._widget)
+
+
+  def update_graphs(self):
+    # Plot the last 5 seconds of data from the PR2.
+    # Get the last 5.5 seconds of data for cleaner edge of the graph.
+    recent_data = self._pr2_interface.get_data_range(-5.5)
+    current_time = rospy.get_rostime().to_nsec()
+
+    if not self._destroyed:
+      self._x_plot.clear()
+      self._x_plot.plot(
+          [(value.get_t_recv() - current_time)/1e9 for value in recent_data],
+          [value.get_x() for value in recent_data])
+      self._x_plot.setXRange(-5, 0)
+      self._y_plot.clear()
+      self._y_plot.plot(
+          [(value.get_t_recv() - current_time)/1e9 for value in recent_data],
+          [value.get_y() for value in recent_data])
+      self._y_plot.setXRange(-5, 0)
+      self._z_plot.clear()
+      self._z_plot.plot(
+          [(value.get_t_recv() - current_time)/1e9 for value in recent_data],
+          [value.get_z() for value in recent_data])
+      self._z_plot.setXRange(-5, 0)
 
   # calls the function to readd the widgets if the window was closed
   def reopen(self):

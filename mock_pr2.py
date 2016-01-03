@@ -6,6 +6,8 @@ import rospy
 
 from std_msgs.msg import String
 
+MESSAGE_RATE = 50 # 50 hz, send 50 messages a second.
+
 class MockPR2:
 
   # This function initializes the Mock PR2 ROS Node, causing it
@@ -24,7 +26,7 @@ class MockPR2:
   # This is the function that will run through a loop to generate "PR2" data to be
   # analyzed by the interface
   def run(self):
-    rate = rospy.Rate(10) # 10hz
+    rate = rospy.Rate(MESSAGE_RATE)
     # While rospy is still running
     while not rospy.is_shutdown():
       # Create a new data_time_tick
@@ -32,7 +34,8 @@ class MockPR2:
       # Generate a json message
       message = json.dumps(data_time_tick)
       # Log the info from the json message
-      rospy.loginfo(message)
+      # rospy.loginfo(message)   (disabled because annoying)
+
       # Publish the message
       self._pub.publish(message)
       # Put the function to sleep for a moment
@@ -40,7 +43,7 @@ class MockPR2:
 
   # This function creates a pulse wave based on a pulse wave with 13 parts.
   def get_pulse_tick(self):
-    val = self._counter % 13
+    val = (self._counter // (MESSAGE_RATE // 10)) % 13
     if (val == 0 or val == 1 or val == 3 or val == 4 or val == 8 or val == 9 or
         val == 11 or val == 12):
       return 0

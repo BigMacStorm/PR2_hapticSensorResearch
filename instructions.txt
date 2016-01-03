@@ -1,13 +1,17 @@
 1. Use a linux operating system to install ROS (I used ubuntu 15.04 in vmware). If you want to do the same, you can follow the instructions here to install ROS jade: http://wiki.ros.org/jade/Installation/Ubuntu.
 
-2. Open up roscore by typing "roscore &" in terminal, to open up roscore in the background. This is a prerequisite of ros based systems.
+2. Install pyqtgraph, the backend library used for graphing, by running the following 2 commands. 
+sudo apt-get install python-pip
+pip install pyqtgraph
 
-3. Test rqt by opening it using "rqt" in terminal.
+3. Open up roscore by typing "roscore &" in terminal, to open up roscore in the background. This is a prerequisite of ros based systems.
 
-4. add the current working directory to the ROS_PACKAGE_PATH environment variable by running the following command from the git directory.
+4. Test rqt by opening it using "rqt" in terminal.
+
+5. add the current working directory to the ROS_PACKAGE_PATH environment variable by running the following command from the git directory.
 export ROS_PACKAGE_PATH="$ROS_PACKAGE_PATH:$(pwd)"
 
-5. You should now be able to run PR2 interface program by opening up rqt and selecting "PR2 hand and syntouch sensor real-time interface" from the plugins dropdown, or in standalone mode by running the following command.
+6. You should now be able to run PR2 interface program by opening up rqt and selecting "PR2 hand and syntouch sensor real-time interface" from the plugins dropdown, or in standalone mode by running the following command.
 rqt --standalone rqt_pr2_hand_syntouch_sensor_interface
 
-6. You can run ./mock_pr2.py in order to simulate the retrieval of data from the PR2 robot.
+7. You can run ./mock_pr2.py in order to simulate the retrieval of data from the PR2 robot.
