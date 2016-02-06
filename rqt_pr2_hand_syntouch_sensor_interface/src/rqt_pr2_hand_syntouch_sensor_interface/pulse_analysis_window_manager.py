@@ -9,8 +9,6 @@ import PyQt4.QtCore as QtCore
 
 from .window_manager import WindowManager
 
-from .mpl_dyanamic import MyMplCanvas, MyDynamicMplCanvas
-
 # class that manages the pulse analysis window and ui
 class PulseAnalysisWindowManager(WindowManager):
 
