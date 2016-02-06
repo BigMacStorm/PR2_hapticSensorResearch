@@ -31,22 +31,37 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
+        <p><img src="http://i.imgur.com/ANu7o3e.gif" alt=""></p>
+
+<h3>
 <a id="project-description" class="anchor" href="#project-description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Project Description</h3>
 
-<p>This program is a suite of tools that utilizes the PR2 (and possibly other ROS capable robots) to measure haptic feedback and manipulate the physical parts of the robot in order to learn about the capabilities of a robot that is able to understand touch. Through this we plan to implement several different systems that will depend on haptic feedback loops, such as picking up a fragile or brittle object and move it to a different location, or detecting the pulse of a human by gently grabbing a users arm.</p>
-
-<h4>
-<a id="program-components" class="anchor" href="#program-components" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Program Components</h4>
-
-<p>Our program consists of several python plugins that are loaded into the ROS manager, which allow us to create different modules to perform different tasks, such as graphing data or moving a piece of the robot. Put together, this system can be seen as a suite of tools to be used with the PR2 in order to help facilitate our research into this field. Below you can see the main menu and a data graphing plugin both loaded and docked into the main client. Any button on the main menu that should access another plugin will load said plugin and also dock it inside of the client window.</p>
-
-<p><img src="http://i.imgur.com/ANu7o3e.gif" alt=""></p>
+<p>This program is a suite of tools that utilizes the PR2 (and possibly other ROS capable robots) to measure haptic feedback and manipulate the physical parts of the robot in order to learn about the capabilities of a robot that is able to understand touch. Through this we plan to implement several different systems that will depend on haptic feedback loops, such as picking up a fragile or brittle object and move it to a different location, or detecting the pulse of a human by gently grabbing a users arm. 
+Our program consists of several python plugins that are loaded into the ROS manager, which allow us to create different modules to perform different tasks, such as graphing data or moving a piece of the robot. Below you can see the main menu and a data graphing plugin both loaded and docked into the main client. Any button on the main menu that should access another plugin will load said plugin and also dock it inside of the client window.</p>
 
 <h3>
 <a id="project-related-resources" class="anchor" href="#project-related-resources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Project Related Resources</h3>
 
-<p>lorem ipsum</p>
+<p>Kuchenbecker, Katherine J. Install BioTacs in ROS.
+<a href="http://bolt-haptics.seas.upenn.edu/index.php/Software/InstallingBioTacs">http://bolt-haptics.seas.upenn.edu/index.php/Software/InstallingBioTacs</a>
+Description: The bolt haptics repository is a repository created and used by UPenn researchers with work done for the PR2 and syntouch sensors; the goals of the repository are very similar to the goals of this senior project. In fact, the work in the repository served as a major inspiration for this project. Unfortunately, most of the code in the repository is for MatLab, and so likely won’t be able to be directly reused. Hopefully, some of the code will be similar enough that it can be easily rewritten in another language and then reused for this project.</p>
+
+<p>Fishel, Jeremy. BioTac® Product Manual.
+<a href="http://www.syntouchllc.com/Products/BioTac/_media/BioTac_Product_Manual.pdf">http://www.syntouchllc.com/Products/BioTac/_media/BioTac_Product_Manual.pdf</a>
+Description: This is simply the product/user manual for the Syntouch BioTac sensors. It provides product care and maintenance information. The manual also includes information about the built in sensors including sensor outputs and a circuit diagram, It also has all command types and samples of how to use them. This product manual will be used to retrieve information relevant to how the Syntouch sensors interact with the interface; for example, it details the format and units of the force, thermal flux, and other sensor data relayed to the interface.</p>
+
+<p>PR2 Hardware Specs.
+Willow Garage
+<a href="https://www.willowgarage.com/pages/pr2/specs">https://www.willowgarage.com/pages/pr2/specs</a>
+Description: This website has the hardware specifications for the PR2. It lists out all of the parts used in the PR2 and has diagrams to show where they are on the PR2. The range of motion of the arm is particularly applicable to the lifting and moving of objects. The arm lengths will also be taken into account for lifting and placing objects; if the range of motion of the PR2 doesn’t allow an action to take place, the user will be alerted with an error message.</p>
+
+<p>PR2 Ros Wiki. 
+<a href="http://wiki.ros.org/Robots/PR2">http://wiki.ros.org/Robots/PR2</a>
+Description: This website is a user-contributed to Wiki site for the Robot Operating System (ROS), and specifically its usage by the PR2 robot. It provides a large amount of information regarding design and implementation for ROS systems, and was an essential resource in the design/limitations of this interface. The examples on this page will be an asset to the project as many of the team members do not have ROS experience, and will need a reference manual in order to learn how to use certain aspects of the ROS programming language.</p>
+
+<p>PR2 User Manual.
+<a href="https://pr2s.clearpathrobotics.com/wiki/PR2%20Manual">https://pr2s.clearpathrobotics.com/wiki/PR2%20Manual</a>
+Description: The site is the user manual for the PR2 robot. It provides information on everything you need to know about the PR2. It provides safety overviews, design features, and how to install the software needed to get started. It also has all the information about all of the moving parts of the robot. In fact, this user manual is probably too detailed in many aspects for our purposes, however it will still be a good resource to fall back to if there are no more concise resources.</p>
 
 <h3>
 <a id="authors" class="anchor" href="#authors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors</h3>
