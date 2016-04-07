@@ -1,7 +1,10 @@
 import rospy
+import json
 from std_msgs.msg import String
 
 from .data_time_tick import DataTimeTick
+from biotac_sensors.msg import BioTacHand
+import rosjson_time
 
 # Class to handle the ROS Node, manage sensor data retrieval from the PR2,
 # store retrieved data, and provide methods for accessing data.
@@ -17,13 +20,29 @@ class SensorManager:
     self._data = []
 
     # Register the callback for receiving data.
-    rospy.Subscriber("PR2_data", String, self.receive_data)
+    rospy.Subscriber("biotac_pub", BioTacHand, self.receive_data, 
+                     queue_size = 1000)
 
+  def convert_data(self, raw_data):
+    raw_data = json.loads(rosjson_time.ros_message_to_json(raw_data))
+    data = {}
+    data['t_send'] = raw_data['bt_time']['frame_end_time']
+    data['temperature'] = raw_data['bt_data'][0]['tdc_data']
+    data['thermal_flux'] = raw_data['bt_data'][0]['tac_data']
+    data['fluid_pressure'] = raw_data['bt_data'][0]['pdc_data']
+    data['microvibration'] = raw_data['bt_data'][0]['pac_data'][0]
+    data['force'] = sum(raw_data['bt_data'][0]['electrode_data'])
+    data['x'] = 0
+    data['y'] = 0
+    data['z'] = 0
+    return json.dumps(data)
+   
   # A callback to be called when data is recieved from the PR2.
   # Args:
   #	  data: A std_msgs.msgs.String object holding data retrived from the
   #         PR2 robot. This data is a dictionary string (in json format).
   def receive_data(self, data):
+    data = self.convert_data(data)
     rospy.loginfo("Received data from node with caller id " + 
                    rospy.get_caller_id())
     self.update_data(data)
@@ -35,7 +54,7 @@ class SensorManager:
   #	  data: A std_msgs.msgs.String object holding data retrived from the
   #         PR2 robot. This data is a dictionary string (in json format).
   def update_data(self, data):
-    data_time_tick = DataTimeTick(data.data, rospy.get_rostime().to_nsec())
+    data_time_tick = DataTimeTick(data, rospy.get_rostime().to_nsec())
     self._data.append(data_time_tick)
 
   # Return the most recent time tick of data. If there is no data yet,

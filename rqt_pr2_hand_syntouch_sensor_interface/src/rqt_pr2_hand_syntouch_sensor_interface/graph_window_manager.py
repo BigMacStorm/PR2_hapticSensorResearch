@@ -64,17 +64,17 @@ class DataGraphsWindowManager(WindowManager):
       self._x_plot.clear()
       self._x_plot.plot(
           [(value.get_t_recv() - current_time)/1e9 for value in recent_data],
-          [value.get_x() for value in recent_data])
+          [value.get_force() for value in recent_data])
       self._x_plot.setXRange(-5, 0)
       self._y_plot.clear()
       self._y_plot.plot(
           [(value.get_t_recv() - current_time)/1e9 for value in recent_data],
-          [value.get_y() for value in recent_data])
+          [value.get_temperature() for value in recent_data])
       self._y_plot.setXRange(-5, 0)
       self._z_plot.clear()
       self._z_plot.plot(
           [(value.get_t_recv() - current_time)/1e9 for value in recent_data],
-          [value.get_z() for value in recent_data])
+          [value.get_thermal_flux() for value in recent_data])
       self._z_plot.setXRange(-5, 0)
 
   # calls the function to readd the widgets if the window was closed
