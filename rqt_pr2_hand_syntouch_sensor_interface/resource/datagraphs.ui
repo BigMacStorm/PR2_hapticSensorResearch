@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>423</width>
+    <height>332</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,20 +22,6 @@
     </widget>
    </item>
    <item>
-    <widget class="QComboBox" name="dg_comboBox">
-     <item>
-      <property name="text">
-       <string>Hand</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Fingers</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
       <string>Graph inputs:</string>
@@ -43,10 +29,57 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>X position: </string>
-     </property>
+    <widget class="QComboBox" name="comboBox">
+     <item>
+      <property name="text">
+       <string>Force 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Force 2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Temperature 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Temperature 2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Thermal Flux 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Thermal Flux 2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Microvibration 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Microvibration 2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Fluid Pressure 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Fluid Pressure 2</string>
+      </property>
+     </item>
     </widget>
    </item>
    <item>
@@ -55,10 +88,57 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Y position: </string>
-     </property>
+    <widget class="QComboBox" name="comboBox_2">
+     <item>
+      <property name="text">
+       <string>Force 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Force 2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Temperature 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Temperature 2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Thermal Flux 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Thermal Flux 2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Microvibration 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Microvibration 2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Fluid Pressure 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Fluid Pressure 2</string>
+      </property>
+     </item>
     </widget>
    </item>
    <item>
@@ -67,10 +147,57 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>Z position: </string>
-     </property>
+    <widget class="QComboBox" name="comboBox_3">
+     <item>
+      <property name="text">
+       <string>Force 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Force 2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Temperature 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Temperature 2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Thermal Flux 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Thermal Flux 2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Microvibration 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Microvibration 2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Fluid Pressure 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Fluid Pressure 2</string>
+      </property>
+     </item>
     </widget>
    </item>
    <item>
