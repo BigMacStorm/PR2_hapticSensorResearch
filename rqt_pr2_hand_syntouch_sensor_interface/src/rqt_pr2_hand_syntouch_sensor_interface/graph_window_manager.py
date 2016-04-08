@@ -35,6 +35,7 @@ class DataGraphsWindowManager(WindowManager):
     self._widget.setObjectName('DataGraphsWindow')
 
     self._widget.setWindowTitle('Data Graphs')
+    self._graph_length = -5.5
 
     self._x_plot = pyqtgraph.PlotWidget()
     self._widget.xMPLlayout.addWidget(self._x_plot)
@@ -50,6 +51,7 @@ class DataGraphsWindowManager(WindowManager):
     self._graph_1_index = 0
     self._graph_2_index = 0
     self._graph_3_index = 0
+    self._widget.spinBox.valueChanged.connect(self.update_graph_length)
     self._widget.comboBox_1.currentIndexChanged.connect(self.change_graph_type)
     self._widget.comboBox_2.currentIndexChanged.connect(self.change_graph_type)
     self._widget.comboBox_3.currentIndexChanged.connect(self.change_graph_type)
@@ -58,6 +60,9 @@ class DataGraphsWindowManager(WindowManager):
     # Add widget to the user interface
     user_interface = pr2_interface.get_user_interface()
     user_interface.add_widget(self._widget)
+
+  def update_graph_length(self):
+    self._graph_length = min(-self._widget.spinBox.value() - .5, 1)
 
   def change_graph_type(self):
     self._graph_1_index = self._widget.comboBox_1.currentIndex()
@@ -90,7 +95,7 @@ class DataGraphsWindowManager(WindowManager):
   def update_graphs(self):
     # Plot the last 5 seconds of data from the PR2.
     # Get the last 5.5 seconds of data for cleaner edge of the graph.
-    recent_data = self._pr2_interface.get_data_range(-5.5)
+    recent_data = self._pr2_interface.get_data_range(self._graph_length)
     current_time = rospy.get_rostime().to_nsec()
 
     if not self._destroyed:
@@ -98,17 +103,17 @@ class DataGraphsWindowManager(WindowManager):
       self._x_plot.plot(
           [(value.get_t_recv() - current_time)/1e9 for value in recent_data],
           [self.value_by_index(value, self._graph_1_index) for value in recent_data])
-      self._x_plot.setXRange(-5, 0)
+      self._x_plot.setXRange(self._graph_length + .5, 0)
       self._y_plot.clear()
       self._y_plot.plot(
           [(value.get_t_recv() - current_time)/1e9 for value in recent_data],
           [self.value_by_index(value, self._graph_2_index) for value in recent_data])
-      self._y_plot.setXRange(-5, 0)
+      self._y_plot.setXRange(self._graph_length + .5, 0)
       self._z_plot.clear()
       self._z_plot.plot(
           [(value.get_t_recv() - current_time)/1e9 for value in recent_data],
           [self.value_by_index(value, self._graph_3_index) for value in recent_data])
-      self._z_plot.setXRange(-5, 0)
+      self._z_plot.setXRange(self._graph_length + .5, 0)
 
   # calls the function to readd the widgets if the window was closed
   def reopen(self):
