@@ -27,11 +27,16 @@ class SensorManager:
     raw_data = json.loads(rosjson_time.ros_message_to_json(raw_data))
     data = {}
     data['t_send'] = raw_data['bt_time']['frame_end_time']
-    data['temperature'] = raw_data['bt_data'][0]['tdc_data']
-    data['thermal_flux'] = raw_data['bt_data'][0]['tac_data']
-    data['fluid_pressure'] = raw_data['bt_data'][0]['pdc_data']
-    data['microvibration'] = raw_data['bt_data'][0]['pac_data'][0]
-    data['force'] = sum(raw_data['bt_data'][0]['electrode_data'])
+    data['temperature'] = [raw_data['bt_data'][0]['tdc_data'],
+                           raw_data['bt_data'][1]['tdc_data']]
+    data['thermal_flux'] = [raw_data['bt_data'][0]['tac_data'],
+                            raw_data['bt_data'][1]['tac_data']]
+    data['fluid_pressure'] = [raw_data['bt_data'][0]['pdc_data'],
+                              raw_data['bt_data'][1]['pdc_data']]
+    data['microvibration'] = [raw_data['bt_data'][0]['pac_data'][0],
+                              raw_data['bt_data'][1]['pac_data'][0]]
+    data['force'] = [sum(raw_data['bt_data'][0]['electrode_data']),
+                     sum(raw_data['bt_data'][1]['electrode_data'])]
     data['x'] = 0
     data['y'] = 0
     data['z'] = 0
@@ -43,8 +48,8 @@ class SensorManager:
   #         PR2 robot. This data is a dictionary string (in json format).
   def receive_data(self, data):
     data = self.convert_data(data)
-    rospy.loginfo("Received data from node with caller id " + 
-                   rospy.get_caller_id())
+    # rospy.loginfo("Received data from node with caller id " + 
+    #                rospy.get_caller_id())
     self.update_data(data)
 
   # Store data in memory for fast retrieval by appending the data to the 

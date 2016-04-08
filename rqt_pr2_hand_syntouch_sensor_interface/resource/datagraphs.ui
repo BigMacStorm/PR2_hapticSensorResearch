@@ -29,7 +29,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QComboBox" name="comboBox">
+    <widget class="QComboBox" name="comboBox_1">
      <item>
       <property name="text">
        <string>Force 1</string>

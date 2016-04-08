@@ -47,12 +47,45 @@ class DataGraphsWindowManager(WindowManager):
 
     self._graph_timer = QtCore.QTimer()
     self._graph_timer.timeout.connect(self.update_graphs)
+    self._graph_1_index = 0
+    self._graph_2_index = 0
+    self._graph_3_index = 0
+    self._widget.comboBox_1.currentIndexChanged.connect(self.change_graph_type)
+    self._widget.comboBox_2.currentIndexChanged.connect(self.change_graph_type)
+    self._widget.comboBox_3.currentIndexChanged.connect(self.change_graph_type)
     self._graph_timer.start(33) # 60 frames per second.  
 
     # Add widget to the user interface
     user_interface = pr2_interface.get_user_interface()
     user_interface.add_widget(self._widget)
 
+  def change_graph_type(self):
+    self._graph_1_index = self._widget.comboBox_1.currentIndex()
+    self._graph_2_index = self._widget.comboBox_2.currentIndex()
+    self._graph_3_index = self._widget.comboBox_3.currentIndex()
+    print "%d %d %d" % (self._graph_1_index, self._graph_2_index, self._graph_3_index)
+
+  def value_by_index(self, DTT, index):
+    if index == 0:
+      return DTT.get_force(0)
+    if index == 1:
+      return DTT.get_force(1)
+    if index == 2:
+      return DTT.get_temperature(0)
+    if index == 3:
+      return DTT.get_temperature(1)
+    if index == 4:
+      return DTT.get_thermal_flux(0)
+    if index == 5:
+      return DTT.get_thermal_flux(1)
+    if index == 6:
+      return DTT.get_microvibration(0)
+    if index == 7:
+      return DTT.get_microvibration(1)
+    if index == 8:
+      return DTT.get_fluid_pressure(0)
+    if index == 9:
+      return DTT.get_fluid_pressure(1)
 
   def update_graphs(self):
     # Plot the last 5 seconds of data from the PR2.
@@ -64,17 +97,17 @@ class DataGraphsWindowManager(WindowManager):
       self._x_plot.clear()
       self._x_plot.plot(
           [(value.get_t_recv() - current_time)/1e9 for value in recent_data],
-          [value.get_force() for value in recent_data])
+          [self.value_by_index(value, self._graph_1_index) for value in recent_data])
       self._x_plot.setXRange(-5, 0)
       self._y_plot.clear()
       self._y_plot.plot(
           [(value.get_t_recv() - current_time)/1e9 for value in recent_data],
-          [value.get_temperature() for value in recent_data])
+          [self.value_by_index(value, self._graph_2_index) for value in recent_data])
       self._y_plot.setXRange(-5, 0)
       self._z_plot.clear()
       self._z_plot.plot(
           [(value.get_t_recv() - current_time)/1e9 for value in recent_data],
-          [value.get_thermal_flux() for value in recent_data])
+          [self.value_by_index(value, self._graph_3_index) for value in recent_data])
       self._z_plot.setXRange(-5, 0)
 
   # calls the function to readd the widgets if the window was closed
