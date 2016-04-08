@@ -1,3 +1,4 @@
+from __future__ import division
 import os
 import rospy
 import rospkg
@@ -25,10 +26,10 @@ class SensorWindowManager(WindowManager):
 
     # Keep track of the lowest and highest value received so far to use for
     # graphing relative sensor intensity.
-    self._low_data_values = {'force':0, 'fluid_pressure':0, 'microvibration':0,
-                             'temperature':0, 'thermal_flux':0}
-    self._high_data_values = {'force':0, 'fluid_pressure':0, 'microvibration':0,
-                             'temperature':0, 'thermal_flux':0}
+    self._low_data_values = {'force':None, 'fluid_pressure':None, 'microvibration':None,
+                             'temperature':None, 'thermal_flux':None}
+    self._high_data_values = {'force':None, 'fluid_pressure':None, 'microvibration':None,
+                             'temperature':None, 'thermal_flux':None}
 
     # Get path to UI file which should be in the "resource" folder of this package
     ui_file = os.path.join(
@@ -83,9 +84,11 @@ class SensorWindowManager(WindowManager):
       last_data_point = current_data_point
 
   def scale(self, data_type, value):
-    if self._low_data_values[data_type] > value:
+    if (self._low_data_values[data_type] > value or
+        self._low_data_values[data_type] is None):
       self._low_data_values[data_type] = value
-    if self._high_data_values[data_type] < value:
+    if (self._high_data_values[data_type] < value or 
+        self._high_data_values[data_type] is None): 
       self._high_data_values[data_type] = value
 
     high = self._high_data_values[data_type]
@@ -94,6 +97,11 @@ class SensorWindowManager(WindowManager):
     bar_draw_height = MIN_BAR_HEIGHT
     if high > low:
       bar_draw_height += ((value - low) / (high - low))*SCALING_FACTOR
+    if(data_type == 'force'):
+      print self._high_data_values
+      print self._low_data_values
+      if high > low:
+        print "%d %.2f" % (bar_draw_height, ((value - low) / (high - low)))
       
     return bar_draw_height
 
