@@ -6,5 +6,5 @@ NUM_WINDOW_TYPES = 12
 class WindowTypes:
   IndexWindow, ConnectionWindow, RunProgramsWindow, DataGraphsWindow, \
   LifetimeStatsWindow, SensorVisualizerWindow, RobotVisualizerWindow, \
-  PulseAnalysisWindow, LiftObjectWindow, PlaceObjectWindow, \
+  PulseAnalysisWindow, GraspObjectWindow, ObjectHandoffWindow, \
   RotateObjectWindow, SwitchHandsWindow = range(NUM_WINDOW_TYPES)

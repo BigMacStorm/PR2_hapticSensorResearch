@@ -8,6 +8,7 @@ from python_qt_binding.QtGui import QWidget
 from .window_manager import WindowManager
 from .window_types import WindowTypes
 
+
 # Class that handles the run programs window and ui.
 class RunProgramsWindowManager(WindowManager):
 
@@ -41,11 +42,11 @@ class RunProgramsWindowManager(WindowManager):
     self._widget.TakePulseButton.clicked.connect(
         self._handle_take_pulse_button_clicked)
 
-    self._widget.LiftObjectButton.clicked.connect(
-        self._handle_lift_object_button_clicked)
+    self._widget.GraspObjectButton.clicked.connect(
+        self._handle_grasp_object_button_clicked)
 
-    self._widget.PlaceObjectButton.clicked.connect(
-        self._handle_place_object_button_clicked)
+    self._widget.ObjectHandoffButton.clicked.connect(
+        self._handle_object_handoff_button_clicked)
 
     self._widget.RotateObjectButton.clicked.connect(
         self._handle_rotate_object_button_clicked)
@@ -53,25 +54,41 @@ class RunProgramsWindowManager(WindowManager):
     self._widget.SwitchHandsButton.clicked.connect(
         self._handle_switch_hands_button_clicked)
 
+    self._widget.OpenHandButton.clicked.connect(
+        self._handle_open_hand_button_clicked)
+
+    self._widget.CloseHandButton.clicked.connect(
+        self._handle_close_hand_button_clicked)
+
   # Opens the pulse analysis window 
   def _handle_take_pulse_button_clicked(self):
     self._pr2_interface.open_window(WindowTypes.PulseAnalysisWindow)
 
-  # Opens the lift object window
-  def _handle_lift_object_button_clicked(self):
-    self._pr2_interface.open_window(WindowTypes.LiftObjectWindow)
+  # Opens the grasp object window
+  def _handle_grasp_object_button_clicked(self):
+    self._pr2_interface.open_window(WindowTypes.GraspObjectWindow)
 
   # Opens the place object window
-  def _handle_place_object_button_clicked(self):
-    self._pr2_interface.open_window(WindowTypes.PlaceObjectWindow)
+  def _handle_object_handoff_button_clicked(self):
+    self._pr2_interface.open_window(WindowTypes.ObjectHandoffWindow)
 
-  # Opens the rotat object window
+  # Opens the rotate object window
   def _handle_rotate_object_button_clicked(self):
     self._pr2_interface.open_window(WindowTypes.RotateObjectWindow)
 
   # Opens the switch hands window
   def _handle_switch_hands_button_clicked(self):
     self._pr2_interface.open_window(WindowTypes.SwitchHandsWindow)
+
+  # Close the PR2 Hand
+  def _handle_close_hand_button_clicked(self):
+    pr2_controller = self._pr2_interface.get_pr2_controller()
+    pr2_controller.signal_close_left_hand()
+
+  # Open the PR2 Hand
+  def _handle_open_hand_button_clicked(self):
+    pr2_controller = self._pr2_interface.get_pr2_controller()
+    pr2_controller.signal_open_left_hand()
 
   # calls the function to readd the widgets if the window was closed
   def reopen(self):

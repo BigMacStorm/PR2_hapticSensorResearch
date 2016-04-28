@@ -1,10 +1,17 @@
+import datetime
 import rospy
 import json
+import pickle
+import os
 from std_msgs.msg import String
 
 from .data_time_tick import DataTimeTick
 from biotac_sensors.msg import BioTacHand
 import rosjson_time
+
+MAX_DATA_LEN = 100000
+DATA_STORAGE_DIR = "/tmp/data/"
+SESSION_ID = str(datetime.datetime.now())
 
 # Class to handle the ROS Node, manage sensor data retrieval from the PR2,
 # store retrieved data, and provide methods for accessing data.
@@ -18,10 +25,21 @@ class SensorManager:
   def __init__(self, pr2_interface):
     self._pr2_interface = pr2_interface
     self._data = []
-
+    self._counter = 1
+    try:
+      os.mkdir(DATA_STORAGE_DIR + SESSION_ID + '/')
+    except:
+      pass
     # Register the callback for receiving data.
     rospy.Subscriber("biotac_pub", BioTacHand, self.receive_data, 
                      queue_size = 1000)
+
+  def dump_data(self):
+    dump_data = self._data[:len(self._data)/2]
+    self._data = self._data[len(self._data)/2:]
+    with open(DATA_STORAGE_DIR + SESSION_ID + '/' + str(self._counter), 'wb') as fp:
+      pickle.dump(dump_data, fp)
+    self._counter += 1
 
   def convert_data(self, raw_data):
     raw_data = json.loads(rosjson_time.ros_message_to_json(raw_data))
@@ -61,6 +79,8 @@ class SensorManager:
   def update_data(self, data):
     data_time_tick = DataTimeTick(data, rospy.get_rostime().to_nsec())
     self._data.append(data_time_tick)
+    if len(self._data) > MAX_DATA_LEN:
+      self.dump_data()
 
   # Return the most recent time tick of data. If there is no data yet,
   # return None.

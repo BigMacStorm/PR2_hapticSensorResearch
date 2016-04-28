@@ -6,8 +6,8 @@ from .run_programs_window_manager import RunProgramsWindowManager
 from .sensor_window_manager import SensorWindowManager
 from .stats_window_manager import LifetimeStatsWindowManager
 from .pulse_analysis_window_manager import PulseAnalysisWindowManager
-from .lift_object_window_manager import LiftObjectWindowManager
-from .place_object_window_manager import PlaceObjectWindowManager
+from .object_handoff_window_manager import ObjectHandoffWindowManager
+from .grasp_object_window_manager import GraspObjectWindowManager
 from .rotate_object_window_manager import RotateObjectWindowManager
 from .switch_hands_window_manager import SwitchHandsWindowManager
 
@@ -68,12 +68,12 @@ class WindowCreationManager:
     elif window_type is WindowTypes.PulseAnalysisWindow:
       self._open_windows[window_type] = (
           PulseAnalysisWindowManager(self._pr2_interface))
-    elif window_type is WindowTypes.LiftObjectWindow:
+    elif window_type is WindowTypes.GraspObjectWindow:
       self._open_windows[window_type] = (
-          LiftObjectWindowManager(self._pr2_interface))
-    elif window_type is WindowTypes.PlaceObjectWindow:
+          GraspObjectWindowManager(self._pr2_interface))
+    elif window_type is WindowTypes.ObjectHandoffWindow:
       self._open_windows[window_type] = (
-          PlaceObjectWindowManager(self._pr2_interface))
+          ObjectHandoffWindowManager(self._pr2_interface))
     elif window_type is WindowTypes.RotateObjectWindow:
       self._open_windows[window_type] = (
           RotateObjectWindowManager(self._pr2_interface))

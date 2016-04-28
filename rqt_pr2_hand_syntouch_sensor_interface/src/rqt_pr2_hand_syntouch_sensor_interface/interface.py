@@ -3,6 +3,7 @@ from python_qt_binding import loadUi
 from python_qt_binding.QtGui import QWidget
 
 from .sensor_manager import SensorManager
+from .pr2_controller import PR2Controller
 from .window_creation_manager import WindowCreationManager
 from .window_types import WindowTypes
 
@@ -31,6 +32,7 @@ class PR2Interface(Plugin):
     # Create a sensor manager object that will begin listening to data
     # coming from the PR2 and the BioTac sensors.
     self._sensor_manager = SensorManager(self)
+    self._pr2_controller = PR2Controller(self)
 
     # Initialize the window manager and open the Index window for the user.
     self._window_creation_manager = WindowCreationManager(self)
@@ -61,6 +63,10 @@ class PR2Interface(Plugin):
   # This function will return the user the user interface from the current context
   def get_user_interface(self):
     return self._context
+
+  # This function will return the singleton pr2 controller object
+  def get_pr2_controller(self):
+    return self._pr2_controller
 
   # This function will signal the window creation manager to open a new window 
   # of a given type.

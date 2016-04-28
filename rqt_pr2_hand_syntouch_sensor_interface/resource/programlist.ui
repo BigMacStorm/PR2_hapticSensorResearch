@@ -52,7 +52,7 @@
     <string>Switch hands</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="PlaceObjectButton">
+  <widget class="QPushButton" name="ObjectHandoffButton">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -62,7 +62,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Place object</string>
+    <string>Object Hand Off</string>
    </property>
   </widget>
   <widget class="QPushButton" name="RotateObjectButton">
@@ -78,7 +78,7 @@
     <string>Rotate object</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="LiftObjectButton">
+  <widget class="QPushButton" name="GraspObjectButton">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -88,7 +88,33 @@
     </rect>
    </property>
    <property name="text">
-    <string>Lift object</string>
+    <string>Grasp Object</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="OpenHandButton">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>150</y>
+     <width>181</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Open Hand</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="CloseHandButton">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>210</y>
+     <width>181</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Close Hand</string>
    </property>
   </widget>
  </widget>
