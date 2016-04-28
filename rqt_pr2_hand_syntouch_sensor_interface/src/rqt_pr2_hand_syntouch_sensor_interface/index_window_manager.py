@@ -1,6 +1,7 @@
 import os
 import rospy
 import rospkg
+import subprocess
 import threading
 
 from python_qt_binding import loadUi
@@ -86,7 +87,7 @@ class IndexWindowManager(WindowManager):
   # This function will check to see if the robot visualizer button is clicked,
   # open the robot visualizer window.
   def _handle_robot_visualizer_button_clicked(self):
-    self._pr2_interface.open_window(WindowTypes.RobotVisualizerWindow)
+    subprocess.Popen(['rviz'])
 
   # This function will check to see if the lifetime statistics button is clicked,
   # open the lifetime statistics window.

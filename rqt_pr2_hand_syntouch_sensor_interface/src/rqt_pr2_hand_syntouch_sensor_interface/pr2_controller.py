@@ -1,6 +1,8 @@
 import rospy
 import actionlib
 import roslib
+import threading
+
 roslib.load_manifest('rospy')
 roslib.load_manifest('actionlib')
 roslib.load_manifest('pr2_controllers_msgs')
@@ -74,38 +76,46 @@ class PR2Controller:
   def signal_move_right_hand(self, elbow_flex, forearm_roll, wrist_pitch, wrist_roll):
     pass
 
+
+  def close_left_hand(self, position=0.0):
+    self._client.send_goal(Pr2GripperCommandGoal(
+            Pr2GripperCommand(position = position, max_effort = 25)))
+    self._client.wait_for_result()
+
+    result = self._client.get_result()
+    did = []
+    if self._client.get_state() != GoalStatus.SUCCEEDED:
+        did.append("failed")
+    else:
+        if result.stalled: did.append("stalled")
+        if result.reached_goal: did.append("reached goal")
+    print ' and '.join(did)
+
+  def open_left_hand(self):
+    self._client.send_goal(Pr2GripperCommandGoal(
+            Pr2GripperCommand(position = 0.088, max_effort = 25)))
+    self._client.wait_for_result()
+
+    result = self._client.get_result()
+    did = []
+    if self._client.get_state() != GoalStatus.SUCCEEDED:
+        did.append("failed")
+    else:
+        if result.stalled: did.append("stalled")
+        if result.reached_goal: did.append("reached goal")
+    print ' and '.join(did)
+
   # This function will signal send a signal to the PR2 to make it close its left hand to a given 
   # pressure limit
   #	pressure_limit: The max pressure the left hand should exert on an object with the hand closed
   # NOTE: This is not actually implemented right now since we are not actually controlling
   #       the PR2 at this time
-  def signal_close_left_hand(self, position):
-    self._client.send_goal(Pr2GripperCommandGoal(
-            Pr2GripperCommand(position = position, max_effort = -1)))
-    self._client.wait_for_result()
-
-    result = self._client.get_result()
-    did = []
-    if self._client.get_state() != GoalStatus.SUCCEEDED:
-        did.append("failed")
-    else:
-        if result.stalled: did.append("stalled")
-        if result.reached_goal: did.append("reached goal")
-    print ' and '.join(did)
-
+  def signal_close_left_hand(self, position=0.0):
+    threading.Thread(target=self.close_left_hand,
+                     kwargs={'position':position}).start()
+    
   def signal_open_left_hand(self):
-    self._client.send_goal(Pr2GripperCommandGoal(
-            Pr2GripperCommand(position = 0.088, max_effort = -1)))
-    self._client.wait_for_result()
-
-    result = self._client.get_result()
-    did = []
-    if self._client.get_state() != GoalStatus.SUCCEEDED:
-        did.append("failed")
-    else:
-        if result.stalled: did.append("stalled")
-        if result.reached_goal: did.append("reached goal")
-    print ' and '.join(did)
+    threading.Thread(target=self.open_left_hand).start()
 
   # This function will signal send a signal to the PR2 to make it close its right hand to a given 
   # pressure limit

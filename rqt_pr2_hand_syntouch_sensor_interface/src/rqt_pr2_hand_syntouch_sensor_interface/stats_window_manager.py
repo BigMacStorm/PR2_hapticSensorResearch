@@ -143,14 +143,18 @@ class LifetimeStatsWindowManager(WindowManager):
         most_performed_action = i
         most_performed_action_count = self._action_occurence_counter[i]
 
-    if most_performed_action == ActionTypes.LiftObject:
-      action_string = 'LiftObject (%d times)' % most_performed_action_count
-    elif most_performed_action == ActionTypes.PlaceObject:
-      action_string = 'PlaceObject (%d times)' % most_performed_action_count
+    if most_performed_action == ActionTypes.HandoffObject:
+      action_string = 'HandoffObject (%d times)' % most_performed_action_count
+    elif most_performed_action == ActionTypes.GraspObject:
+      action_string = 'GraspObject (%d times)' % most_performed_action_count
     elif most_performed_action == ActionTypes.RotateObject:
       action_string = 'RotateObject (%d times)' % most_performed_action_count
     elif most_performed_action == ActionTypes.SwitchHands:
       action_string = 'SwitchHands (%d times)' % most_performed_action_count
+    elif most_performed_action == ActionTypes.CloseHand:
+      action_string = 'CloseHand (%d times)' % most_performed_action_count
+    elif most_performed_action == ActionTypes.OpenHand:
+      action_string = 'OpenHand (%d times)' % most_performed_action_count
     else:
       action_string = 'None'
 

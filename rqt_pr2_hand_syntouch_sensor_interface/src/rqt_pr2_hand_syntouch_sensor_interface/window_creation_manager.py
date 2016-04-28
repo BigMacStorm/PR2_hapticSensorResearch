@@ -1,7 +1,6 @@
 from .connection_window_manager import ConnectionWindowManager
 from .graph_window_manager import DataGraphsWindowManager
 from .index_window_manager import IndexWindowManager
-from .robot_window_manager import RobotWindowManager
 from .run_programs_window_manager import RunProgramsWindowManager
 from .sensor_window_manager import SensorWindowManager
 from .stats_window_manager import LifetimeStatsWindowManager
@@ -52,9 +51,6 @@ class WindowCreationManager:
     elif window_type is WindowTypes.SensorVisualizerWindow:
       self._open_windows[window_type] = (
           SensorWindowManager(self._pr2_interface))
-    elif window_type is WindowTypes.RobotVisualizerWindow:
-      self._open_windows[window_type] = (
-          RobotWindowManager(self._pr2_interface))
     elif window_type is WindowTypes.LifetimeStatsWindow:
       self._open_windows[window_type] = (
           LifetimeStatsWindowManager(self._pr2_interface))

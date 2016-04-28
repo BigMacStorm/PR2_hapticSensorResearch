@@ -51,28 +51,33 @@ class GraspObjectWindowManager(WindowManager):
 
     last_data_point = None
     current_data_point = self._pr2_interface.get_most_recent_data()
-    start_value = current_data_point.get_fluid_pressure()
-    threshold = 200
+    start_value0 = current_data_point.get_fluid_pressure(0)
+    start_value1 = current_data_point.get_fluid_pressure(1)
+    threshold = 20
     curr_scalar = 1
+    rate = rospy.Rate(60) # 60hz
     while not grasp_complete:
       current_data_point = self._pr2_interface.get_most_recent_data()
       if last_data_point and last_data_point != current_data_point:
-        if abs(current_data_point.get_fluid_pressure() - 
-               start_value) > threshold or curr_scalar <= 0:
+        stop = (abs(current_data_point.get_fluid_pressure(0) - 
+                start_value0) > threshold and 
+                abs(current_data_point.get_fluid_pressure(1) - 
+                start_value1) > threshold) or curr_scalar <= 0
+        if stop:
 	  curr_text += '\nGrasp completed.'
 	  self._widget.OutputTextBox.document().setPlainText(curr_text)
           grasp_complete = True
         else:
-          curr_scalar -= .01
-          pr2_controller.signal_close_left_hand(HAND_OPEN_POSITION*curr_scalar)
+          curr_scalar -= .005
+          pr2_controller.close_left_hand(HAND_OPEN_POSITION*curr_scalar)
           print curr_scalar
           
       last_data_point = current_data_point
-      self._pr2_interface.get_most_recent_data()
+      rate.sleep()
 
     # TODO: Add code to call the PR2_Controller to move the hand, control the
     # hand to lift the object, etc.
-    self._pr2_interface.notify_action_performed(ActionTypes.PlaceObject)
+    self._pr2_interface.notify_action_performed(ActionTypes.GraspObject)
     
 
   def _handle_grasp_button_clicked(self):

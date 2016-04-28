@@ -5,6 +5,7 @@ import rospkg
 from python_qt_binding import loadUi
 from python_qt_binding.QtGui import QWidget
 
+from .action_types import ActionTypes
 from .window_manager import WindowManager
 from .window_types import WindowTypes
 
@@ -84,11 +85,13 @@ class RunProgramsWindowManager(WindowManager):
   def _handle_close_hand_button_clicked(self):
     pr2_controller = self._pr2_interface.get_pr2_controller()
     pr2_controller.signal_close_left_hand()
+    self._pr2_interface.notify_action_performed(ActionTypes.CloseHand)
 
   # Open the PR2 Hand
   def _handle_open_hand_button_clicked(self):
     pr2_controller = self._pr2_interface.get_pr2_controller()
     pr2_controller.signal_open_left_hand()
+    self._pr2_interface.notify_action_performed(ActionTypes.OpenHand)
 
   # calls the function to readd the widgets if the window was closed
   def reopen(self):
