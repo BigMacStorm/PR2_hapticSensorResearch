@@ -54,7 +54,7 @@ class ObjectHandoffWindowManager(WindowManager):
 
     rate = rospy.Rate(10) # 10hz
     last_data_point = None
-    threshold = 3
+    threshold = self._widget.spinBox.value() 
     while not hand_off_complete:
       current_data_point = self._pr2_interface.get_most_recent_data()
       if last_data_point and last_data_point != current_data_point:

@@ -42,6 +42,10 @@ class GraspObjectWindowManager(WindowManager):
     # Register a listener for the lift button.
     self._widget.GraspButton.clicked.connect(self._handle_grasp_button_clicked)
 
+    self._widget.OutputTextBox.document().setPlainText(
+        'Pressing the Grasp button will start the PR2 to close its hand \
+         to try to grasp an object.')
+
   # function to handle the lift button being clicked.
   def _socially_aware_grasp(self):
     curr_text = 'Performing a socially aware grasp.'
@@ -53,7 +57,7 @@ class GraspObjectWindowManager(WindowManager):
     current_data_point = self._pr2_interface.get_most_recent_data()
     start_value0 = current_data_point.get_fluid_pressure(0)
     start_value1 = current_data_point.get_fluid_pressure(1)
-    threshold = 20
+    threshold = self._widget.spinBox.value() 
     curr_scalar = 1
     rate = rospy.Rate(60) # 60hz
     while not grasp_complete:
