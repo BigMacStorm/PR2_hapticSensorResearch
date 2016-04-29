@@ -75,6 +75,9 @@ class PR2Interface(Plugin):
   def open_window(self, window_type):
     self._window_creation_manager.new_window_manager(window_type)
 
+  def save_data(self):
+    self._sensor_manager.save_data()
+
   # This function returns the most recent DataTimeTick object retrieved
   # from the PR2.
   def get_most_recent_data(self):

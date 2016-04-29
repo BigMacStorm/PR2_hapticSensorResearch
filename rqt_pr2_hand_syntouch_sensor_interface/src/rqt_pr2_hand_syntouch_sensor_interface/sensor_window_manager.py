@@ -59,6 +59,7 @@ class SensorWindowManager(WindowManager):
 
     # While rospy is still running and this window has not been destroyed.
     while not rospy.is_shutdown() and not self._destroyed:
+      biotac_id = self._widget.comboBox.currentIndex()
 
       # Get the most recent data from the pr2 interface.
       current_data_point = self._pr2_interface.get_most_recent_data()
@@ -67,17 +68,19 @@ class SensorWindowManager(WindowManager):
         pass
       else:
         self.update_bar_height(self._widget.ForceBar,
-            self.scale('force', current_data_point.get_force()))
+            self.scale('force', current_data_point.get_force(biotac_id)))
         self.update_bar_height(self._widget.FluidPressureBar, 
             self.scale('fluid_pressure', 
-                       current_data_point.get_fluid_pressure()))
+                       current_data_point.get_fluid_pressure(biotac_id)))
         self.update_bar_height(self._widget.MicroVibrationBar,
             self.scale('microvibration', 
-                       current_data_point.get_microvibration()))
+                       current_data_point.get_microvibration(biotac_id)))
         self.update_bar_height(self._widget.TemperatureBar,
-            self.scale('temperature', current_data_point.get_temperature()))
+            self.scale('temperature', 
+                       current_data_point.get_temperature(biotac_id)))
         self.update_bar_height(self._widget.ThermalFluxBar,
-            self.scale('thermal_flux', current_data_point.get_thermal_flux()))
+            self.scale('thermal_flux', 
+                       current_data_point.get_thermal_flux(biotac_id)))
 
       # Make the thread go to sleep and set the last data point to the current data point.
       rate.sleep()

@@ -55,6 +55,9 @@ class IndexWindowManager(WindowManager):
     self._widget.RobotVisualizerButton.clicked.connect(
         self._handle_robot_visualizer_button_clicked)
 
+    self._widget.SaveDataButton.clicked.connect(
+        self._handle_save_data_button_clicked)
+
     self._widget.LifetimeStatisticsButton.clicked.connect(
         self._handle_lifetime_statistics_button_clicked)
 
@@ -88,6 +91,11 @@ class IndexWindowManager(WindowManager):
   # open the robot visualizer window.
   def _handle_robot_visualizer_button_clicked(self):
     subprocess.Popen(['rviz'])
+
+  # This function is used to save data to file when the save data button is
+  # clicked.
+  def _handle_save_data_button_clicked(self):
+    self._pr2_interface.save_data()
 
   # This function will check to see if the lifetime statistics button is clicked,
   # open the lifetime statistics window.

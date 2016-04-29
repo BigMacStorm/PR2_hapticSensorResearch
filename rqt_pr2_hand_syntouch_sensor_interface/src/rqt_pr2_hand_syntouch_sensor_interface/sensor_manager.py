@@ -25,21 +25,31 @@ class SensorManager:
   def __init__(self, pr2_interface):
     self._pr2_interface = pr2_interface
     self._data = []
-    self._counter = 1
+    self._dump_counter = 1
+    self._save_counter = 1
     try:
-      os.mkdir(DATA_STORAGE_DIR + SESSION_ID + '/')
+      if not os.path.exists(DATA_STORAGE_DIR + SESSION_ID + '/'):
+        os.makedirs(DATA_STORAGE_DIR + SESSION_ID + '/')
     except:
       pass
     # Register the callback for receiving data.
     rospy.Subscriber("biotac_pub", BioTacHand, self.receive_data, 
                      queue_size = 1000)
 
+  def save_data(self):
+    path = DATA_STORAGE_DIR + SESSION_ID + '/save' + str(self._save_counter)
+    print 'saving to %s' % path
+    with open(path, 'wb') as fp:
+      pickle.dump(self._data, fp)
+    self._save_counter += 1
+
   def dump_data(self):
     dump_data = self._data[:len(self._data)/2]
     self._data = self._data[len(self._data)/2:]
-    with open(DATA_STORAGE_DIR + SESSION_ID + '/' + str(self._counter), 'wb') as fp:
+    with open(DATA_STORAGE_DIR + SESSION_ID + '/' + 
+              str(self._dump_counter), 'wb') as fp:
       pickle.dump(dump_data, fp)
-    self._counter += 1
+    self._dump_counter += 1
 
   def convert_data(self, raw_data):
     raw_data = json.loads(rosjson_time.ros_message_to_json(raw_data))

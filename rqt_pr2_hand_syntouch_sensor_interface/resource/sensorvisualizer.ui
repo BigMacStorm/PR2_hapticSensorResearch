@@ -232,6 +232,26 @@ border:none;
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>10</y>
+     <width>331</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>BioTac Finger 1</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>BioTac Finger 2</string>
+    </property>
+   </item>
+  </widget>
  </widget>
  <resources/>
  <connections/>
