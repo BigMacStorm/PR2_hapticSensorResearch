@@ -16,7 +16,7 @@ SESSION_ID = str(datetime.datetime.now())
 # Class to handle the ROS Node, manage sensor data retrieval from the PR2,
 # store retrieved data, and provide methods for accessing data.
 class SensorManager:
-  
+
   # Initializes the SensorManager class. The SensorManager class
   # creates a list for sensor data to be placed in and sets up
   # a subscriber to take in and handle new data.
@@ -33,9 +33,11 @@ class SensorManager:
     except:
       pass
     # Register the callback for receiving data.
-    rospy.Subscriber("biotac_pub", BioTacHand, self.receive_data, 
+    rospy.Subscriber("biotac_pub", BioTacHand, self.receive_data,
                      queue_size = 1000)
 
+  # Saves the current data stored in self._data to file in python pickle
+  # format. The file name is is stored in DATA_STORAGE_DIR + SESSION_ID.
   def save_data(self):
     path = DATA_STORAGE_DIR + SESSION_ID + '/save' + str(self._save_counter)
     print 'saving to %s' % path
@@ -43,14 +45,24 @@ class SensorManager:
       pickle.dump(self._data, fp)
     self._save_counter += 1
 
+  # Dumps half the data in the array to a dump file (same as a save file,
+  # see above). This essentially reduces the memory footprint of the program
+  # by half. Should be called at a certain memory threshold.
   def dump_data(self):
     dump_data = self._data[:len(self._data)/2]
     self._data = self._data[len(self._data)/2:]
-    with open(DATA_STORAGE_DIR + SESSION_ID + '/' + 
+    with open(DATA_STORAGE_DIR + SESSION_ID + '/' +
               str(self._dump_counter), 'wb') as fp:
       pickle.dump(dump_data, fp)
     self._dump_counter += 1
 
+  # Converts data from the raw data format (as known by rosjson_time.py)
+  # to a dictionary of sensor_type: value_list, where value_list is
+  # a list of values indexed by biotac_id. This format is expected by
+  # DataTimeTick Objects.
+  # Args:
+  # 	raw_data: Data from the biotac sensors in a raw message format,
+  #             to be decoded by previously written code in rosjson_time.py.
   def convert_data(self, raw_data):
     raw_data = json.loads(rosjson_time.ros_message_to_json(raw_data))
     data = {}
@@ -69,18 +81,18 @@ class SensorManager:
     data['y'] = 0
     data['z'] = 0
     return json.dumps(data)
-   
+
   # A callback to be called when data is recieved from the PR2.
   # Args:
   #	  data: A std_msgs.msgs.String object holding data retrived from the
   #         PR2 robot. This data is a dictionary string (in json format).
   def receive_data(self, data):
     data = self.convert_data(data)
-    # rospy.loginfo("Received data from node with caller id " + 
+    # rospy.loginfo("Received data from node with caller id " +
     #                rospy.get_caller_id())
     self.update_data(data)
 
-  # Store data in memory for fast retrieval by appending the data to the 
+  # Store data in memory for fast retrieval by appending the data to the
   # end of the data list. Since data is always retrieved in-order, this
   # list of DataTimeTicks sorted by data retrieval time.
   # Args:
@@ -99,7 +111,7 @@ class SensorManager:
       return self._data[-1]
     else:
       return None
-    
+
   # This function returns a sorted list of DataTimeTick objects representing
   # sensor data from an interval of time.
   #
@@ -125,7 +137,7 @@ class SensorManager:
     left = 0
     right = len(self._data) - 1
 
-    # Find the first DataTimeTick in the data list after t0 by performing 
+    # Find the first DataTimeTick in the data list after t0 by performing
     # a binary search.
     while(left < right):
       mid = (left + right) / 2
@@ -139,12 +151,12 @@ class SensorManager:
     # if no t1 is None, return all data retrieved since t0.
     if t1 is None:
       return self._data[t0_index:]
-  
+
     t1_time = rospy.get_rostime().to_nsec() + t1 * 1e9
     left = 0
     right = len(self._data) - 1
 
-    # Find the last DataTimeTick in the data list before t1 by performing 
+    # Find the last DataTimeTick in the data list before t1 by performing
     # a binary search.
     while(left < right):
       mid = (left + right) / 2

@@ -28,26 +28,36 @@ class DataTimeTick:
     return self.data['z']
 
   # This function will return the force of the left hand
+  # Args:
+  #   biotac_id: integer identifying which biotac finger to return data from.
   def get_force(self, biotac_id=0):
     return self.data['force'][biotac_id]
 
   # This function will return the temperature currently being 
   # sensed by the Syntouch Sensors on the left hand
+  # Args:
+  #   biotac_id: integer identifying which biotac finger to return data from.
   def get_temperature(self, biotac_id=0):
     return self.data['temperature'][biotac_id]
 
   # This function will return the thermal flux currently being 
   # sensed by the Syntouch Sensors on the left hand
+  # Args:
+  #   biotac_id: integer identifying which biotac finger to return data from.
   def get_thermal_flux(self, biotac_id=0):
     return self.data['thermal_flux'][biotac_id]
 
   # This function will return the microvibration currently being 
   # sensed by the Syntouch Sensors on the left hand
+  # Args:
+  #   biotac_id: integer identifying which biotac finger to return data from.
   def get_microvibration(self, biotac_id=0):
     return self.data['microvibration'][biotac_id]
 
   # This function will return the fluid pressure currently being 
   # applied to the Syntouch Sensors on the left hand
+  # Args:
+  #   biotac_id: integer identifying which biotac finger to return data from.
   def get_fluid_pressure(self, biotac_id=0):
     return self.data['fluid_pressure'][biotac_id]
 

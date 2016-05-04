@@ -4,14 +4,23 @@
 sudo apt-get install python-pip
 pip install pyqtgraph
 
-3. Open up roscore by typing "roscore &" in terminal, to open up roscore in the background. This is a prerequisite of ros based systems.
+3. Test rqt by opening it using "rqt" in terminal.
 
-4. Test rqt by opening it using "rqt" in terminal.
+4. add the current working directory to the ROS_PACKAGE_PATH environment variable by running the following command from the git directory.
+export ROS_PACKAGE_PATH="$ROS_PACKAGE_PATH:$(pwd)". It is recommended you add this line to your .bashrc.
 
-5. add the current working directory to the ROS_PACKAGE_PATH environment variable by running the following command from the git directory.
-export ROS_PACKAGE_PATH="$ROS_PACKAGE_PATH:$(pwd)"
+
+5. In order to run the PR2 interface program correctly, you must first install the biotac driver for linux by following found at http://wiki.ros.org/biotac_driver. Additionally, don't forget to source the file in ~/catkin_ws/devel/setup.bash.
+source ~/catkin_ws/devel/setup.bash.
+It is recommended you add this line to your .bashrc.
 
 6. You should now be able to run PR2 interface program by opening up rqt and selecting "PR2 hand and syntouch sensor real-time interface" from the plugins dropdown, or in standalone mode by running the following command.
 rqt --standalone rqt_pr2_hand_syntouch_sensor_interface
 
-7. You can run ./mock_pr2.py in order to simulate the retrieval of data from the PR2 robot.
+7. In order to collect data from the biotac sensors, you must first start up the biotac driver in its own terminal. Do this by opening up another terminal and running the following:
+rosrun biotac_sensors biotac_pub
+This must be started every time before opening the PR2 interface program.
+
+8. If the PR2 interface says the connection to the PR2 or PR2 interface is disconnected, try restarting the rqt and the entire PR2 interface program, as it may fix the connection.
+
+9. Don't forget to robot claim and robot start on the PR2!

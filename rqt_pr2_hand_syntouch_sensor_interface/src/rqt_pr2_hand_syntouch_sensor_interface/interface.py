@@ -32,6 +32,9 @@ class PR2Interface(Plugin):
     # Create a sensor manager object that will begin listening to data
     # coming from the PR2 and the BioTac sensors.
     self._sensor_manager = SensorManager(self)
+
+    # Create a pr2 controller object that can be used to communicate with
+    # and therefore control the PR2.
     self._pr2_controller = PR2Controller(self)
 
     # Initialize the window manager and open the Index window for the user.
@@ -60,11 +63,12 @@ class PR2Interface(Plugin):
         print 'arguments: ', args
         print 'unknowns: ', unknowns
 
-  # This function will return the user the user interface from the current context
+  # This function will return the user the user interface from the 
+  # current context.
   def get_user_interface(self):
     return self._context
 
-  # This function will return the singleton pr2 controller object
+  # This function will return the singleton pr2 controller object.
   def get_pr2_controller(self):
     return self._pr2_controller
 
@@ -75,6 +79,8 @@ class PR2Interface(Plugin):
   def open_window(self, window_type):
     self._window_creation_manager.new_window_manager(window_type)
 
+  # Save data currently stored by the pr2 interface to a predefined storage
+  # file. See sensors_manager.py for more details.
   def save_data(self):
     self._sensor_manager.save_data()
 
