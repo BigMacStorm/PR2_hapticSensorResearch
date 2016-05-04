@@ -21,7 +21,7 @@ class SensorManager:
   # creates a list for sensor data to be placed in and sets up
   # a subscriber to take in and handle new data.
   # Args:
-  # 	pr2_interface: The single pr2 interface plug in object.
+  #   pr2_interface: The single pr2 interface plug in object.
   def __init__(self, pr2_interface):
     self._pr2_interface = pr2_interface
     self._data = []
@@ -61,7 +61,7 @@ class SensorManager:
   # a list of values indexed by biotac_id. This format is expected by
   # DataTimeTick Objects.
   # Args:
-  # 	raw_data: Data from the biotac sensors in a raw message format,
+  #   raw_data: Data from the biotac sensors in a raw message format,
   #             to be decoded by previously written code in rosjson_time.py.
   def convert_data(self, raw_data):
     raw_data = json.loads(rosjson_time.ros_message_to_json(raw_data))
@@ -84,7 +84,7 @@ class SensorManager:
 
   # A callback to be called when data is recieved from the PR2.
   # Args:
-  #	  data: A std_msgs.msgs.String object holding data retrived from the
+  #   data: A std_msgs.msgs.String object holding data retrived from the
   #         PR2 robot. This data is a dictionary string (in json format).
   def receive_data(self, data):
     data = self.convert_data(data)
@@ -96,7 +96,7 @@ class SensorManager:
   # end of the data list. Since data is always retrieved in-order, this
   # list of DataTimeTicks sorted by data retrieval time.
   # Args:
-  #	  data: A std_msgs.msgs.String object holding data retrived from the
+  #   data: A std_msgs.msgs.String object holding data retrived from the
   #         PR2 robot. This data is a dictionary string (in json format).
   def update_data(self, data):
     data_time_tick = DataTimeTick(data, rospy.get_rostime().to_nsec())
@@ -118,8 +118,8 @@ class SensorManager:
   # Example: get_data_range(-5, -3) will return all sensor data retrieved from 5
   #          seconds ago to 3 seconds ago.
   # Args:
-  # 	t0: The start time offest of the requested time interval, in seconds.
-  # 	t1: The end time offest of the requested time interval, in seconds.
+  #   t0: The start time offest of the requested time interval, in seconds.
+  #   t1: The end time offest of the requested time interval, in seconds.
   def get_data_range(self, t0, t1=0):
     # Handle the edge case where there is no data yet.
     if not self._data:

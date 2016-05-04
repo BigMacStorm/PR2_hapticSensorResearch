@@ -13,7 +13,7 @@ class PR2Interface(Plugin):
 
   # Initialize the PR2 interface class/plugin.
   # Args:
-  # 	context: The qt_gui.plugin_context.PluginContext object for the
+  #   context: The qt_gui.plugin_context.PluginContext object for the
   #            PR2 interface plugin, implementing the rqt api as described in
   #            the API Overview linked below.
   #            http://wiki.ros.org/rqt/Reviews/2012-06-20_API_Review
@@ -49,7 +49,7 @@ class PR2Interface(Plugin):
 
   # This function will process plugin command-line arguments.
   # Args:
-  # 	context: The PluginContext object representing the PR2 Interface.
+  #   context: The PluginContext object representing the PR2 Interface.
   def parse_arguments(self, context):
     from argparse import ArgumentParser
     parser = ArgumentParser()
@@ -75,7 +75,7 @@ class PR2Interface(Plugin):
   # This function will signal the window creation manager to open a new window 
   # of a given type.
   # Args:
-  # 	window_type: A WindowType indicating the type of window manager to open.
+  #   window_type: A WindowType indicating the type of window manager to open.
   def open_window(self, window_type):
     self._window_creation_manager.new_window_manager(window_type)
 
@@ -95,8 +95,8 @@ class PR2Interface(Plugin):
   # Example: get_data_range(-5, -3) will return all sensor data retrieved from 5
   #          seconds ago to 3 seconds ago.
   # Args:
-  # 	t0: The start time offest of the requested time interval, in seconds.
-  # 	t1: The end time offest of the requested time interval, in seconds.
+  #   t0: The start time offest of the requested time interval, in seconds.
+  #   t1: The end time offest of the requested time interval, in seconds.
   def get_data_range(self, t0, t1=0):
     return self._sensor_manager.get_data_range(t0, t1)
 
@@ -113,7 +113,7 @@ class PR2Interface(Plugin):
   # This function will notify the LifetimeStatsManager object of an action having
   # been completed.
   # Args:
-  #    action_type: The ActionType representing the action completed.
+  #   action_type: The ActionType representing the action completed.
   def notify_action_performed(self, action_type):
     open_windows = self._window_creation_manager._open_windows
     LifetimeStatsWindow = (open_windows[WindowTypes.LifetimeStatsWindow])
@@ -121,8 +121,8 @@ class PR2Interface(Plugin):
 
   # This function will save settings that the user has chosen
   # Args:
-  # 	plugin_settings: the current settings as they were before being changed
-  # 	instance_settings: the settings that the user has currently changed
+  #   plugin_settings: the current settings as they were before being changed
+  #   instance_settings: the settings that the user has currently changed
   def save_settings(self, plugin_settings, instance_settings):
     # TODO save intrinsic configuration, usually using:
     # instance_settings.set_value(k, v)
@@ -130,8 +130,8 @@ class PR2Interface(Plugin):
 
   # This function will restore settings that have been changed to the default settings
   # Args:
-  # 	plugin_settings: the current settings as they were before being changed
-  # 	instance_settings: the settings that the user has currently changed
+  #  plugin_settings: the current settings as they were before being changed
+  #  instance_settings: the settings that the user has currently changed
   def restore_settings(self, plugin_settings, instance_settings):
     # TODO restore intrinsic configuration, usually using:
     # v = instance_settings.value(k)
