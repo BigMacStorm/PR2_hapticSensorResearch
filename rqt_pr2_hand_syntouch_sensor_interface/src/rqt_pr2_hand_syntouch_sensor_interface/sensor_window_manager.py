@@ -113,8 +113,3 @@ class SensorWindowManager(WindowManager):
     current_geometry.setY(int(BOTTOM_BAR_POSITION - height))
     current_geometry.setHeight(int(height))
     bar.setGeometry(current_geometry)
-
-  # This function will reopen this window.
-  def reopen(self):
-    user_interface = self._pr2_interface.get_user_interface()
-    user_interface.add_widget(self._widget)

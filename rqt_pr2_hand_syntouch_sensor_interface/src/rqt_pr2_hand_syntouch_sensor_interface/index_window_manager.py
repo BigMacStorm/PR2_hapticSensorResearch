@@ -122,17 +122,15 @@ class IndexWindowManager(WindowManager):
       # just for testing purposes to use with the mock_pr2.py which is simulating
       # incoming pr2 data.
       if last_data_point == current_data_point or not last_data_point:
-        self._widget.label.setText("PR2 Status: Disconnected")
         self._widget.label_2.setText("Syntouch (fingers) Status: Disconnected")
       else:
-        self._widget.label.setText("PR2 Status: Connected")
         self._widget.label_2.setText("Syntouch (fingers) Status: Connected")
+
+      if self._pr2_interface.get_pr2_controller().is_connected():
+        self._widget.label.setText("PR2 Status: Connected")
+      else:
+        self._widget.label.setText("PR2 Status: Disonnected")
 
       # Make the thread go to sleep and set the last data point to the current data point.
       rate.sleep()
       last_data_point = current_data_point
-
-  # This function will reopen this window.
-  def reopen(self):
-    user_interface = self._pr2_interface.get_user_interface()
-    user_interface.add_widget(self._widget)

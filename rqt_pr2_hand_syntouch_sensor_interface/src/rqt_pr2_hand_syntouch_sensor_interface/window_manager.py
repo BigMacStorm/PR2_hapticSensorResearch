@@ -25,3 +25,8 @@ class WindowManager:
   def shutdown(self):
     self._destroyed = True
 
+  # Re-adds the widget to the user interface window.
+  # (different from adding first time because constructor not called.
+  def reopen(self):
+    user_interface = self._pr2_interface.get_user_interface()
+    user_interface.add_widget(self._widget)

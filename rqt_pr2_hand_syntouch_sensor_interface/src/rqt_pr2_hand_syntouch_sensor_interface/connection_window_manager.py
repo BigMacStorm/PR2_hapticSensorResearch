@@ -102,8 +102,3 @@ class ConnectionWindowManager(WindowManager):
     # divide by 1e6 to convert from nanoseconds to milliseconds
     self._widget.LatencyLabel.setText('Latency: %s ns (%s ms)' 
         % (str(latency), str(latency/1e6)))
-
-  # calls the function to readd the widgets if the window was closed
-  def reopen(self):
-    user_interface = self._pr2_interface.get_user_interface()
-    user_interface.add_widget(self._widget)

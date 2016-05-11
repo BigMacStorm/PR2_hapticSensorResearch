@@ -114,8 +114,3 @@ class DataGraphsWindowManager(WindowManager):
           [(value.get_t_recv() - current_time)/1e9 for value in recent_data],
           [self.value_by_index(value, self._graph_3_index) for value in recent_data])
       self._z_plot.setXRange(self._graph_length + .5, 0)
-
-  # calls the function to readd the widgets if the window was closed
-  def reopen(self):
-    user_interface = self._pr2_interface.get_user_interface()
-    user_interface.add_widget(self._widget)

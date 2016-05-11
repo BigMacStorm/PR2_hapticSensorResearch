@@ -50,8 +50,3 @@ class SwitchHandsWindowManager(WindowManager):
     # TODO: Add code to call the PR2_Controller to move the hand, control the
     # hand to lift the object, etc.
     self._pr2_interface.notify_action_performed(ActionTypes.SwitchHands)
-
-  # calls the function to readd the widgets if the window was closed
-  def reopen(self):
-    user_interface = self._pr2_interface.get_user_interface()
-    user_interface.add_widget(self._widget)

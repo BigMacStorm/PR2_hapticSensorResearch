@@ -92,8 +92,3 @@ class RunProgramsWindowManager(WindowManager):
     pr2_controller = self._pr2_interface.get_pr2_controller()
     pr2_controller.signal_open_left_hand()
     self._pr2_interface.notify_action_performed(ActionTypes.OpenHand)
-
-  # calls the function to readd the widgets if the window was closed
-  def reopen(self):
-    user_interface = self._pr2_interface.get_user_interface()
-    user_interface.add_widget(self._widget)

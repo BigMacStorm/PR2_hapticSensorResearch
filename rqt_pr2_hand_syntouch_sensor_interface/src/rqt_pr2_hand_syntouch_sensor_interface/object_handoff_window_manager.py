@@ -88,8 +88,3 @@ class ObjectHandoffWindowManager(WindowManager):
     # updates to the user interface.
     self._worker = threading.Thread(target=self._socially_aware_handoff)
     self._worker.start()
-
-  # calls the function to readd the widgets if the window was closed
-  def reopen(self):
-    user_interface = self._pr2_interface.get_user_interface()
-    user_interface.add_widget(self._widget)

@@ -206,8 +206,3 @@ class LifetimeStatsWindowManager(WindowManager):
     hours = connection_uptime // 3600
     self._widget.ConnectionUptimeLabel.setText('%02d:%02d:%02d %s' 
         % (hours, minutes, seconds, disconnected_string)) 
-
-  # This function will reopen this window.
-  def reopen(self):
-    user_interface = self._pr2_interface.get_user_interface()
-    user_interface.add_widget(self._widget)

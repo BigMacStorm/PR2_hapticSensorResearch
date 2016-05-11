@@ -58,8 +58,3 @@ class PulseAnalysisWindowManager(WindowManager):
           [(value.get_t_recv() - current_time)/1e9 for value in recent_data],
           [value.get_force() for value in recent_data])
       self._pulse_graph.setXRange(-5, 0)
-
-  # calls the function to readd the widgets if the window was closed
-  def reopen(self):
-    user_interface = self._pr2_interface.get_user_interface()
-    user_interface.add_widget(self._widget)

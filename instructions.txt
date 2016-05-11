@@ -1,4 +1,4 @@
-1. Use a linux operating system to install ROS (I used ubuntu 15.04 in vmware). If you want to do the same, you can follow the instructions here to install ROS jade: http://wiki.ros.org/jade/Installation/Ubuntu.
+1. Use a linux operating system to install ROS. Program has been tested in Ubuntu 14.04, 15.04.
 
 2. Install pyqtgraph, the backend library used for graphing, by running the following 2 commands. 
 sudo apt-get install python-pip
@@ -6,13 +6,14 @@ pip install pyqtgraph
 
 3. Test rqt by opening it using "rqt" in terminal.
 
-4. add the current working directory to the ROS_PACKAGE_PATH environment variable by running the following command from the git directory.
-export ROS_PACKAGE_PATH="$ROS_PACKAGE_PATH:$(pwd)". It is recommended you add this line to your .bashrc.
+4. In order to run the PR2 interface program correctly, you must first install the biotac driver for linux by following the tutorial found at http://wiki.ros.org/biotac_driver.
 
-
-5. In order to run the PR2 interface program correctly, you must first install the biotac driver for linux by following found at http://wiki.ros.org/biotac_driver. Additionally, don't forget to source the file in ~/catkin_ws/devel/setup.bash.
-source ~/catkin_ws/devel/setup.bash.
-It is recommended you add this line to your .bashrc.
+5. In order for the PR2 interface program to run, it is necessary that the environment be set up correctly. Notably, the ROS_PACKAGE_PATH environment variable must contain catkin_ws and the root directory for this git repository. Furthermore, the catkin_ws should be setup by sourcing .../catkin_ws/devel/setup.bash.
+Example of a working .bashrc:
+source /opt/ros/jade/setup.bash
+source ~/catkin_ws/devel/setup.bash
+export ROS_PACKAGE_PATH="/home/exiledz/PR2_hapticSensorResearch:/opt/ros/jade/share:/opt/ros/jade/stacks:/home/exiledz/catkin_ws"
+export PROMPT_DIRTRIM=2
 
 6. You should now be able to run PR2 interface program by opening up rqt and selecting "PR2 hand and syntouch sensor real-time interface" from the plugins dropdown, or in standalone mode by running the following command.
 rqt --standalone rqt_pr2_hand_syntouch_sensor_interface
@@ -21,6 +22,10 @@ rqt --standalone rqt_pr2_hand_syntouch_sensor_interface
 rosrun biotac_sensors biotac_pub
 This must be started every time before opening the PR2 interface program.
 
-8. If the PR2 interface says the connection to the PR2 or PR2 interface is disconnected, try restarting the rqt and the entire PR2 interface program, as it may fix the connection.
+8. Don't forget to robot claim and robot start on the PR2!
 
-9. Don't forget to robot claim and robot start on the PR2!
+Common Problems:
+If the PR2 interface says the connection to the PR2 or PR2 interface is disconnected, try restarting the rqt and the entire PR2 interface program, as it may fix the connection. Connection restarting is not yet fully implemented.
+
+If the rqt plugin wont start because it cant load the pr2_controllers_msgs manifest, try sudo apt-get install ros-jade-pr2-controllers-msgs. (also can try using different ros distros of this lib).
+

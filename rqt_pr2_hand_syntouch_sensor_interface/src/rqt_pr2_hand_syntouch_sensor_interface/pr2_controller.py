@@ -12,6 +12,8 @@ from pr2_controllers_msgs.msg import *
 HAND_OPEN_POSITION = .088
 HAND_CLOSE_POSITION = 0
 
+# TODO: Class needs work. Methods should probably return false if movement
+#       fails. Also connection maintenance is not well-performed.
 class PR2Controller:
 
   # This function will initialize the PR2 controller. This class will be responsible
@@ -20,7 +22,10 @@ class PR2Controller:
     self._pr2_interface = pr2_interface
     self._client = actionlib.SimpleActionClient(
         'l_gripper_controller/gripper_action', Pr2GripperCommandAction)
-    self._client.wait_for_server()
+
+    # Call blocks main thread, give up if can't connect to PR2 in .5 seconds.
+    # TODO: Handle failure case.
+    self._connected = self._client.wait_for_server(rospy.Duration(.5))
 
   # This function will send a signal to the PR2 to make it move to the given
   # coordinates
@@ -129,3 +134,8 @@ class PR2Controller:
   # left hand.
   def signal_open_left_hand(self):
     threading.Thread(target=self.open_left_hand).start()
+
+  # This function will return true if there is an active connection to the PR2.
+  # Otherwise, this function will return false.
+  def is_connected(self):
+    return self._connected
